@@ -1,0 +1,2803 @@
+[
+  {
+    "theme_documentation_url": "http:\/\/corknine.com\/pipeline-docs\/",
+    "theme_version": "2.2",
+    "theme_author": "Corknine",
+    "theme_support_email": "themes@corknine.com",
+    "name": "theme_info",
+    "theme_name": "Pipeline"
+  },
+  {
+    "settings": [
+      {
+        "content": "Top bar",
+        "type": "header"
+      },
+      {
+        "id": "color_account_bg",
+        "default": "#FFFFFF",
+        "label": "Background",
+        "type": "color"
+      },
+      {
+        "id": "color_account_text",
+        "default": "#000000",
+        "label": "Text",
+        "type": "color"
+      },
+      {
+        "content": "Header",
+        "type": "header"
+      },
+      {
+        "id": "color_header_bg",
+        "default": "#ffffff",
+        "label": "Background",
+        "type": "color"
+      },
+      {
+        "id": "color_header_text",
+        "default": "#333333",
+        "label": "Text",
+        "type": "color"
+      },
+      {
+        "content": "General",
+        "type": "header"
+      },
+      {
+        "id": "color_body_bg",
+        "default": "#ffffff",
+        "label": "Body background",
+        "type": "color"
+      },
+      {
+        "id": "color_body_text",
+        "default": "#000000",
+        "label": "Body text",
+        "type": "color"
+      },
+      {
+        "id": "color_primary",
+        "default": "#333333",
+        "label": "Link color",
+        "type": "color",
+        "info": "For text links and primary buttons."
+      },
+      {
+        "id": "color_splash",
+        "default": "#1f9bde",
+        "label": "Accent color",
+        "type": "color",
+        "info": "A bright color for highlighting elements."
+      },
+      {
+        "id": "color_border",
+        "default": "#cccccc",
+        "label": "Border color",
+        "type": "color"
+      },
+      {
+        "content": "Home page",
+        "type": "header"
+      },
+      {
+        "id": "homepage_background_light",
+        "default": "#f7f7f7",
+        "label": "Light background",
+        "type": "color"
+      },
+      {
+        "id": "homepage_background_dark",
+        "default": "#2e3438",
+        "label": "Dark background",
+        "type": "color"
+      },
+      {
+        "content": "Product page",
+        "type": "header"
+      },
+      {
+        "id": "product_background_color",
+        "default": "#FFFFFF",
+        "label": "Background color",
+        "type": "color",
+        "info": "Choose the background color used in isolated product photos, usually white."
+      },
+      {
+        "id": "product_slideshow_arrows",
+        "default": "#cccccc",
+        "label": "Product slideshow arrows",
+        "type": "color"
+      },
+      {
+        "content": "Footer",
+        "type": "header"
+      },
+      {
+        "id": "color_footer_bg",
+        "default": "#f2f2f2",
+        "label": "Background",
+        "type": "color"
+      },
+      {
+        "id": "color_footer_text",
+        "default": "#333333",
+        "label": "Text",
+        "type": "color"
+      },
+      {
+        "id": "color_footer_social_link",
+        "default": "#333333",
+        "label": "Icons",
+        "type": "color"
+      }
+    ],
+    "name": "Color"
+  },
+  {
+    "settings": [
+      {
+        "content": "Choose the fonts used on your site.",
+        "type": "paragraph"
+      },
+      {
+        "content": "Fonts",
+        "type": "header"
+      },
+      {
+        "id": "font_title",
+        "label": "Headings font",
+        "type": "select",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica \/ Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "id": "font_title_capitalize",
+        "label": "Capitalize headings",
+        "type": "checkbox"
+      },
+      {
+        "id": "font_accent",
+        "label": "Subheading font",
+        "type": "select",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica \/ Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "id": "font_body",
+        "label": "Body font",
+        "type": "select",
+        "options": [
+          {
+            "value": "'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Century Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica \/ Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Montserrat:400",
+            "label": "Montserrat",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Questrial:400",
+            "label": "Questrial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Open+Sans:400",
+            "label": "Open Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lato:400",
+            "label": "Lato",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Oswald:400",
+            "label": "Oswald",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Roboto:400",
+            "label": "Roboto",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Raleway:400",
+            "label": "Raleway",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Megrim:400",
+            "label": "Megrim",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Abel:400",
+            "label": "Abel",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Lobster+Two:400",
+            "label": "Lobster Two",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Source+Sans+Pro:400",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:PT+Mono:400",
+            "label": "PT Mono",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Sans:400",
+            "label": "Josefin Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "'Hoefler Text','Baskerville Old Face',Garamond,'Times New Roman',serif",
+            "label": "Hoefler Text",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Cardo:400",
+            "label": "Cardo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:PT+Serif:400",
+            "label": "PT Serif",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Lora:400",
+            "label": "Lora",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Arvo:400",
+            "label": "Arvo",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Slabo+13px:400",
+            "label": "Slabo 13px",
+            "group": "Serif"
+          },
+          {
+            "value": "google:sansStack:Josefin+Slab:400",
+            "label": "Josefin Slab",
+            "group": "Serif"
+          },
+          {
+            "value": "google:serifStack:Glegoo:400",
+            "label": "Glegoo",
+            "group": "Serif"
+          }
+        ]
+      },
+      {
+        "content": "Size",
+        "type": "header"
+      },
+      {
+        "id": "base_font_size",
+        "default": "14px",
+        "label": "Base font size",
+        "type": "select",
+        "options": [
+          {
+            "value": "12px",
+            "label": "12px"
+          },
+          {
+            "value": "13px",
+            "label": "13px"
+          },
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          }
+        ],
+        "info": "14px reccomended"
+      }
+    ],
+    "name": "Typography"
+  },
+  {
+    "settings": [
+      {
+        "id": "cart_type",
+        "label": "Cart type",
+        "type": "select",
+        "options": [
+          {
+            "value": "modal",
+            "label": "Modal"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ]
+      },
+      {
+        "id": "cart_show_on_click",
+        "default": true,
+        "label": "Show modal when item is added",
+        "type": "checkbox"
+      },
+      {
+        "id": "cart_vendor_enable",
+        "label": "Show product vendor",
+        "type": "checkbox"
+      },
+      {
+        "id": "cart_notes_enable",
+        "label": "Show cart notes",
+        "type": "checkbox"
+      },
+      {
+        "id": "cart_quantity",
+        "default": true,
+        "label": "Show quantity selectors",
+        "type": "checkbox"
+      },
+      {
+        "id": "cart_show_additional_buttons",
+        "default": true,
+        "label": "Show additional checkout options",
+        "type": "checkbox",
+        "info": "Apple Pay, PayPal express, etc"
+      },
+      {
+        "id": "cart_continue_browsing",
+        "label": "Empty cart link",
+        "type": "url",
+        "info": "Continue browsing link for the empty cart"
+      }
+    ],
+    "name": "Cart"
+  },
+  {
+    "settings": [
+      {
+        "content": "Product layout",
+        "type": "header"
+      },
+      {
+        "content": "Control how products look when displayed side-by-side in collections and groups of related products.",
+        "type": "paragraph"
+      },
+      {
+        "id": "collection_text_alignment",
+        "default": "text-center",
+        "label": "Text alignment",
+        "type": "select",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "Left"
+          },
+          {
+            "value": "text-center",
+            "label": "Center"
+          },
+          {
+            "value": "text-right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "id": "product_grid_style",
+        "label": "Price hover effect",
+        "type": "select",
+        "info": "Price will always show on small devices and phones.",
+        "options": [
+          {
+            "value": "under",
+            "label": "Always show price"
+          },
+          {
+            "value": "hover",
+            "label": "Show price on hover"
+          }
+        ]
+      },
+      {
+        "content": "Image auto-height",
+        "type": "header"
+      },
+      {
+        "content": "Neatly align title and price fields underneath unevenly sized images.",
+        "type": "paragraph"
+      },
+      {
+        "id": "image_autoheight_enable",
+        "default": true,
+        "label": "Enable image auto-height",
+        "type": "checkbox"
+      }
+    ],
+    "name": "Product grid"
+  },
+  {
+    "settings": [
+      {
+        "content": "Accounts",
+        "type": "header"
+      },
+      {
+        "id": "twittercard_handle",
+        "label": "Twitter handle",
+        "type": "text",
+        "info": "E.g. @Shopify. Required for Twitter cards."
+      },
+      {
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "type": "text",
+        "info": "https:\/\/twitter.com\/shopify"
+      },
+      {
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "type": "text",
+        "info": "https:\/\/facebook.com\/shopify"
+      },
+      {
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "type": "text",
+        "info": "https:\/\/instagram.com\/shopify"
+      },
+      {
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "type": "text",
+        "info": "https:\/\/pinterest.com\/shopify"
+      },
+      {
+        "id": "social_google_link",
+        "label": "Google Plus",
+        "type": "text",
+        "info": "https:\/\/plus.google.com\/+shopify"
+      },
+      {
+        "id": "social_youtube_link",
+        "label": "Youtube",
+        "type": "text",
+        "info": "https:\/\/www.youtube.com\/shopify"
+      },
+      {
+        "id": "social_vimeo_link",
+        "label": "Vimeo",
+        "type": "text",
+        "info": "https:\/\/vimeo.com\/shopify"
+      },
+      {
+        "id": "social_tumblr_link",
+        "label": "Tumblr",
+        "type": "text",
+        "info": "http:\/\/shopify.tumblr.com"
+      },
+      {
+        "id": "social_fancy_link",
+        "label": "Fancy",
+        "type": "text",
+        "info": "http:\/\/fancy.com\/shopify"
+      },
+      {
+        "content": "Sharing",
+        "type": "header"
+      },
+      {
+        "id": "product_social_enable",
+        "label": "Enable product sharing",
+        "type": "checkbox"
+      },
+      {
+        "id": "share_enable_facebook",
+        "label": "Share on Facebook",
+        "type": "checkbox"
+      },
+      {
+        "id": "share_enable_twitter",
+        "label": "Tweet on Twitter",
+        "type": "checkbox"
+      },
+      {
+        "id": "share_enable_pinterest",
+        "label": "Pin on Pinterest",
+        "type": "checkbox"
+      },
+      {
+        "id": "share_enable_google",
+        "label": "+1 on Google Plus",
+        "type": "checkbox"
+      }
+    ],
+    "name": "Social"
+  },
+  {
+    "settings": [
+      {
+        "id": "favicon",
+        "label": "Favicon image",
+        "type": "image_picker",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ],
+    "name": "Favicon"
+  },
+  {
+    "settings": [
+      {
+        "id": "show_multiple_currencies",
+        "default": true,
+        "label": "Enable Auto Currency App?",
+        "type": "checkbox"
+      },
+      {
+        "content": "Although you will be able to display prices on your store front in different currencies, Shopify will still process orders in your shop's currency.",
+        "type": "paragraph"
+      },
+      {
+        "id": "show_decimal_places",
+        "default": true,
+        "label": "Round Decimal Digits to .00 ?",
+        "type": "checkbox"
+      },
+      {
+        "id": "hide_decimal_places",
+        "label": "Hide Decimal Digits? ( Remove .00 )",
+        "type": "checkbox"
+      },
+      {
+        "content": "By selecting the Hide Decimal Digits checkbox, the prices will be diplayed without decimal digits.",
+        "type": "paragraph"
+      },
+      {
+        "id": "currency_format",
+        "default": "money_with_currency_format",
+        "label": "Money format",
+        "type": "select",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Without Currency, ex: $10.00"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "With Currency, ex: $10 CAD"
+          }
+        ]
+      },
+      {
+        "id": "supported_currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "label": "Currencies you wish to support",
+        "type": "text"
+      },
+      {
+        "id": "default_currency",
+        "default": "USD",
+        "label": "Default currency",
+        "type": "text"
+      },
+      {
+        "content": "Separate your currency codes with a space. Use the ISO 4217 3-letter currency code. Click [here](http:\/\/www.xe.com\/iso4217.php) for a complete list of currency codes. Example: CAD USD.",
+        "type": "paragraph"
+      }
+    ],
+    "name": "Money options"
+  },
+  {
+    "name": "Crowd Control - Survey A",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_enable_cookies",
+        "label": "Prevent backers from returning to purchase Reward items again?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_btn_universal",
+        "label": "Buttons universal settings",
+        "info": "All buttons will be same background, text, border color",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_border_color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_btn_border_radius",
+        "label": "Button corner radius",
+        "default": "3px"
+      },
+      {
+        "type": "header",
+        "content": "Returning visitor\/Welcome message"
+      },
+      {
+        "type": "image_picker",
+        "id": "crwdctrl-welrvmsg-pagebg",
+        "label": "Page background image (optional)"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-pagebg-color",
+        "label": "Page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-bg-color",
+        "label": "Content background color",
+        "default": "#FBED8B"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-heading",
+        "label": "Welcome heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-heading",
+        "label": "Returning visitor heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-heading-color",
+        "label": "Heading text color",
+        "default": "#C2292D"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-subheading",
+        "label": "Welcome sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-subheading",
+        "label": "Returning visitor sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-subheading-color",
+        "label": "Sub-heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-welcmsg-text",
+        "label": "Welcome content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-returningmsg-text",
+        "label": "Returning visitor content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-content-color",
+        "label": "Content text color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-content-fontsize",
+        "label": "Content text size",
+        "default": "13px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-button-text",
+        "label": "Welcome button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-button-text",
+        "label": "Returning visitor button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-text-color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-bg-color",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-border-color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-top-bottom-space",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between pop-up and the top\/bottom of the browser (e.g. 10px\/10px)",
+        "default": "35px\/35px"
+      },
+      {
+        "type": "header",
+        "content": "Disclaimer Pop-up"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_disclaimer_popup_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_heading",
+        "label": "Heading text",
+        "default": "Disclaimer"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_content",
+        "label": "Content text",
+        "default": "This is a legal disclaimer that stores can use to advise customers on critical details pertaining to their order."
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_chkbxtext",
+        "label": "Checkbox label",
+        "default": "I accept these terms and conditions"
+      },
+      {
+        "type": "header",
+        "content": "Rewards Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_pickopt",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_qtyopt",
+        "label": "Enable quantity option",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_desc",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_prodprice",
+        "label": "Show product price",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_reward_product_view",
+        "label": "Variant display option",
+        "default": "horizontal_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "Selector boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "Dropdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_reward_prod_spacing",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between top\/bottom of each product (e.g. 10px\/10px)",
+        "default": "0px\/20px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_border_color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Product Quick View Pop-up"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_pagebg_color",
+        "label": "Pop-up page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_bg_color",
+        "label": "Pop-up background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_border_color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Special Offer"
+      },
+      {
+        "type": "checkbox",
+        "id": "special-offer-btns-enable",
+        "label": "Enable buttons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-text",
+        "label": "Heading text",
+        "default": "Take advantage of special offers?"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn1-text",
+        "label": "Left button text",
+        "default": "Take a Look"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn2-text",
+        "label": "Right button text",
+        "default": "No, Thanks"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-topbottom",
+        "label": "Section spacing",
+        "info": "Spacing between top\/bottom of section (e.g. 10px\/10px)",
+        "default": "60px\/70px"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-fontsize",
+        "label": "Heading text size",
+        "default": "23px"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-bg",
+        "label": "Background color",
+        "default": "#BCCCD4"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-headtext-color",
+        "label": "Heading text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-color",
+        "label": "Button text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-border-color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Add-on Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_pickopt",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_show_desc",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_text",
+        "label": "Heading text",
+        "default": "Purchase additional items?"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_fontsize",
+        "label": "Heading text size",
+        "default": "42px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_headtext_topbottom",
+        "label": "Heading text spacing",
+        "info": "Spacing between top\/bottom of heading text (e.g. 10px\/10px)",
+        "default": "30px\/45px"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_product_view",
+        "label": "Product display",
+        "default": "vertical_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "List with variant boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "List with dropdown variants"
+          },
+          {
+            "value": "vertical_box",
+            "label": "Grid with variant boxes"
+          },
+          {
+            "value": "vertical_dropdown",
+            "label": "Grid with dropdown variants"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_prod_per_row",
+        "label": "Number of products per row",
+        "default": "3",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_prod_spacing",
+        "label": "Product list spacing",
+        "info": "Product top\/bottom spacing ex: 10px\/10px",
+        "default": "0px\/15px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_sale_price_color",
+        "label": "Backer pricing color",
+        "default": "#bd3b10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_bg",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_headtext_color",
+        "label": "Upsell heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_border_color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Bottom"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_redirect",
+        "label": "Next page",
+        "default": "checkout",
+        "info": "Redirect on the special offer \"RIGHT BUTTON\" and bottom \"CONFIRM ADDRESS\" button",
+        "options": [
+          {
+            "value": "checkout",
+            "label": "Checkout"
+          },
+          {
+            "value": "widget",
+            "label": "Widget page"
+          },
+          {
+            "value": "cart",
+            "label": "Cart page"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_page_url",
+        "label": "Widget page url",
+        "default": "pages\/cc-widget",
+        "info": "(e.g. pages\/cc-widget)"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_bottom_button_text",
+        "label": "Button text",
+        "default": "Confirm Address"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_bg",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_border_color",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      }
+    ]
+  },
+  {
+    "name": "Crowd Control - Survey B",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_enable_cookies_b",
+        "label": "Prevent backers from returning to purchase Reward items again?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_btn_universal_b",
+        "label": "Buttons universal settings",
+        "info": "All buttons will be same background, text, border color",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_bg_b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_text_color_b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_border_color_b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_btn_border_radius_b",
+        "label": "Button corner radius",
+        "default": "3px"
+      },
+      {
+        "type": "header",
+        "content": "Returning visitor\/Welcome message"
+      },
+      {
+        "type": "image_picker",
+        "id": "crwdctrl-welrvmsg-pagebg-b",
+        "label": "Page background image (optional)"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-pagebg-color-b",
+        "label": "Page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-bg-color-b",
+        "label": "Content background color",
+        "default": "#FBED8B"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-heading-b",
+        "label": "Welcome heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-heading-b",
+        "label": "Returning visitor heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-heading-color-b",
+        "label": "Heading text color",
+        "default": "#C2292D"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-subheading-b",
+        "label": "Welcome sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-subheading-b",
+        "label": "Returning visitor sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-subheading-color-b",
+        "label": "Sub-heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-welcmsg-text-b",
+        "label": "Welcome content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-returningmsg-text-b",
+        "label": "Returning visitor content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-content-color-b",
+        "label": "Content text color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-content-fontsize-b",
+        "label": "Content text size",
+        "default": "13px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-button-text-b",
+        "label": "Welcome button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-button-text-b",
+        "label": "Returning visitor button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-text-color-b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-bg-color-b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-border-color-b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-top-bottom-space-b",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between pop-up and the top\/bottom of the browser (e.g. 10px\/10px)",
+        "default": "35px\/35px"
+      },
+      {
+        "type": "header",
+        "content": "Disclaimer Pop-up"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_disclaimer_popup_enable_b",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_heading_b",
+        "label": "Heading text",
+        "default": "Disclaimer"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_content_b",
+        "label": "Content text",
+        "default": "This is a legal disclaimer that stores can use to advise customers on critical details pertaining to their order."
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_chkbxtext_b",
+        "label": "Checkbox label",
+        "default": "I accept these terms and conditions"
+      },
+      {
+        "type": "header",
+        "content": "Rewards Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_pickopt_b",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_qtyopt_b",
+        "label": "Enable quantity option",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_desc_b",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_prodprice_b",
+        "label": "Show product price",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_reward_product_view_b",
+        "label": "Variant display option",
+        "default": "horizontal_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "Selector boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "Dropdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_reward_prod_spacing_b",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between top\/bottom of each product (e.g. 10px\/10px)",
+        "default": "0px\/20px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_bg_b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_text_color_b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_border_color_b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Product Quick View Pop-up"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_pagebg_color_b",
+        "label": "Pop-up page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_bg_color_b",
+        "label": "Pop-up background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_bg_b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_text_color_b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_border_color_b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Special Offer"
+      },
+      {
+        "type": "checkbox",
+        "id": "special-offer-btns-enable-b",
+        "label": "Enable buttons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-text-b",
+        "label": "Heading text",
+        "default": "Take advantage of special offers?"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn1-text-b",
+        "label": "Left button text",
+        "default": "Take a Look"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn2-text-b",
+        "label": "Right button text",
+        "default": "No, Thanks"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-topbottom-b",
+        "label": "Section spacing",
+        "info": "Spacing between top\/bottom of section (e.g. 10px\/10px)",
+        "default": "60px\/70px"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-fontsize-b",
+        "label": "Heading text size",
+        "default": "23px"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-bg-b",
+        "label": "Background color",
+        "default": "#BCCCD4"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-headtext-color-b",
+        "label": "Heading text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-bg-b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-color-b",
+        "label": "Button text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-border-color-b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Add-on Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_pickopt_b",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_show_desc_b",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_text_b",
+        "label": "Heading text",
+        "default": "Purchase additional items?"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_fontsize_b",
+        "label": "Heading text size",
+        "default": "42px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_headtext_topbottom_b",
+        "label": "Heading text spacing",
+        "info": "Spacing between top\/bottom of heading text (e.g. 10px\/10px)",
+        "default": "30px\/45px"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_product_view_b",
+        "label": "Product display",
+        "default": "vertical_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "List with variant boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "List with dropdown variants"
+          },
+          {
+            "value": "vertical_box",
+            "label": "Grid with variant boxes"
+          },
+          {
+            "value": "vertical_dropdown",
+            "label": "Grid with dropdown variants"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_prod_per_row_b",
+        "label": "Number of products per row",
+        "default": "3",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_prod_spacing_b",
+        "label": "Product list spacing",
+        "info": "Product top\/bottom spacing ex: 10px\/10px",
+        "default": "0px\/15px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_sale_price_color_b",
+        "label": "Backer pricing color",
+        "default": "#bd3b10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_bg_b",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_headtext_color_b",
+        "label": "Upsell heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_bg_b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_text_color_b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_border_color_b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Bottom"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_redirect_b",
+        "label": "Next page",
+        "default": "checkout",
+        "info": "Redirect on the special offer \"RIGHT BUTTON\" and bottom \"CONFIRM ADDRESS\" button",
+        "options": [
+          {
+            "value": "checkout",
+            "label": "Checkout"
+          },
+          {
+            "value": "widget",
+            "label": "Widget page"
+          },
+          {
+            "value": "cart",
+            "label": "Cart page"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_page_url_b",
+        "label": "Widget page url",
+        "default": "pages\/cc-widget",
+        "info": "(e.g. pages\/cc-widget)"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_bottom_button_text_b",
+        "label": "Button text",
+        "default": "Confirm Address"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_bg_b",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_text_color_b",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_border_color_b",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      }
+    ]
+  },
+  {
+    "name": "Crowd Control - Survey C",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_enable_cookies_c",
+        "label": "Prevent backers from returning to purchase Reward items again?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_btn_universal_c",
+        "label": "Buttons universal settings",
+        "info": "All buttons will be same background, text, border color",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_bg_c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_text_color_c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_btn_border_color_c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_btn_border_radius_c",
+        "label": "Button corner radius",
+        "default": "3px"
+      },
+      {
+        "type": "header",
+        "content": "Returning visitor\/Welcome message"
+      },
+      {
+        "type": "image_picker",
+        "id": "crwdctrl-welrvmsg-pagebg-c",
+        "label": "Page background image (optional)"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-pagebg-color-c",
+        "label": "Page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-bg-color-c",
+        "label": "Content background color",
+        "default": "#FBED8B"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-heading-c",
+        "label": "Welcome heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-heading-c",
+        "label": "Returning visitor heading text",
+        "default": "Welcome Kickstarter backer!"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-heading-color-c",
+        "label": "Heading text color",
+        "default": "#C2292D"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-subheading-c",
+        "label": "Welcome sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-subheading-c",
+        "label": "Returning visitor sub-heading text",
+        "default": "Kickstarter subheading"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-subheading-color-c",
+        "label": "Sub-heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-welcmsg-text-c",
+        "label": "Welcome content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl-returningmsg-text-c",
+        "label": "Returning visitor content",
+        "default": "<p>This is a demonstration page for how you can use your online store to better take care of your Kickstarter\/Indiegogo backers. Both this pop-up and following page are customizable to allow you to maintain your brand’s authentic voice as well as control which items are shown to specific backer groups.<\/p><p>By using Crowd Control, you can place a page like this one on your website for backers to confirm reward details (color, size, etc), purchase additional items, provide shipping info, then pay for any new items or pledge deficiencies. Our approach to pledge management helps you take control of your business by improving the experience for both you and your new customers. Get backers what they want faster, increase revenue, and utilize your momentum from crowdfunding to keep business moving in the right direction.<\/p><p>Say hello to real business solutions for getting the most out crowdfunding. We’re glad you came.<\/p>"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-content-color-c",
+        "label": "Content text color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-content-fontsize-c",
+        "label": "Content text size",
+        "default": "13px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welcmsg-button-text-c",
+        "label": "Welcome button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-returningmsg-button-text-c",
+        "label": "Returning visitor button text",
+        "default": "I Understand"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-text-color-c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-bg-color-c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl-welrvmsg-button-border-color-c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl-welrvmsg-top-bottom-space-c",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between pop-up and the top\/bottom of the browser (e.g. 10px\/10px)",
+        "default": "35px\/35px"
+      },
+      {
+        "type": "header",
+        "content": "Disclaimer Pop-up"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_disclaimer_popup_enable_c",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_heading_c",
+        "label": "Heading text",
+        "default": "Disclaimer"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_content_c",
+        "label": "Content text",
+        "default": "This is a legal disclaimer that stores can use to advise customers on critical details pertaining to their order."
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_disclaimer_popup_chkbxtext_c",
+        "label": "Checkbox label",
+        "default": "I accept these terms and conditions"
+      },
+      {
+        "type": "header",
+        "content": "Rewards Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_pickopt_c",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_qtyopt_c",
+        "label": "Enable quantity option",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_desc_c",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_reward_show_prodprice_c",
+        "label": "Show product price",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_reward_product_view_c",
+        "label": "Variant display option",
+        "default": "horizontal_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "Selector boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "Dropdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_reward_prod_spacing_c",
+        "label": "Top\/bottom spacing",
+        "info": "Spacing between top\/bottom of each product (e.g. 10px\/10px)",
+        "default": "0px\/20px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_bg_c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_text_color_c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_reward_btn_border_color_c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Product Quick View Pop-up"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_pagebg_color_c",
+        "label": "Pop-up page background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_bg_color_c",
+        "label": "Pop-up background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_bg_c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_text_color_c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_quickview_btn_border_color_c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Special Offer"
+      },
+      {
+        "type": "checkbox",
+        "id": "special-offer-btns-enable-c",
+        "label": "Enable buttons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-text-c",
+        "label": "Heading text",
+        "default": "Take advantage of special offers?"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn1-text-c",
+        "label": "Left button text",
+        "default": "Take a Look"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-btn2-text-c",
+        "label": "Right button text",
+        "default": "No, Thanks"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-topbottom-c",
+        "label": "Section spacing",
+        "info": "Spacing between top\/bottom of section (e.g. 10px\/10px)",
+        "default": "60px\/70px"
+      },
+      {
+        "type": "text",
+        "id": "special-offer-heading-fontsize-c",
+        "label": "Heading text size",
+        "default": "23px"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-bg-c",
+        "label": "Background color",
+        "default": "#BCCCD4"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-headtext-color-c",
+        "label": "Heading text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-bg-c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-color-c",
+        "label": "Button text color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "special-offer-button-border-color-c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Add-on Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_pickopt_c",
+        "label": "Add pick option",
+        "default": true,
+        "info": "Add \"Pick a Option\" as first option to select boxes, ex: \"Pick a Size\""
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_upsell_show_desc_c",
+        "label": "Show description",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_text_c",
+        "label": "Heading text",
+        "default": "Purchase additional items?"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_heading_fontsize_c",
+        "label": "Heading text size",
+        "default": "42px"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_headtext_topbottom_c",
+        "label": "Heading text spacing",
+        "info": "Spacing between top\/bottom of heading text (e.g. 10px\/10px)",
+        "default": "30px\/45px"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_product_view_c",
+        "label": "Product display",
+        "default": "vertical_dropdown",
+        "options": [
+          {
+            "value": "horizontal_box",
+            "label": "List with variant boxes"
+          },
+          {
+            "value": "horizontal_dropdown",
+            "label": "List with dropdown variants"
+          },
+          {
+            "value": "vertical_box",
+            "label": "Grid with variant boxes"
+          },
+          {
+            "value": "vertical_dropdown",
+            "label": "Grid with dropdown variants"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_upsell_prod_per_row_c",
+        "label": "Number of products per row",
+        "default": "3",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_upsell_prod_spacing_c",
+        "label": "Product list spacing",
+        "info": "Product top\/bottom spacing ex: 10px\/10px",
+        "default": "0px\/15px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_sale_price_color_c",
+        "label": "Backer pricing color",
+        "default": "#bd3b10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_bg_c",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_headtext_color_c",
+        "label": "Upsell heading text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_bg_c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_text_color_c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_upsell_btn_border_color_c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "header",
+        "content": "Bottom"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_redirect_c",
+        "label": "Next page",
+        "default": "checkout",
+        "info": "Redirect on the special offer \"RIGHT BUTTON\" and bottom \"CONFIRM ADDRESS\" button",
+        "options": [
+          {
+            "value": "checkout",
+            "label": "Checkout"
+          },
+          {
+            "value": "widget",
+            "label": "Widget page"
+          },
+          {
+            "value": "cart",
+            "label": "Cart page"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_page_url_c",
+        "label": "Widget page url",
+        "default": "pages\/cc-widget",
+        "info": "(e.g. pages\/cc-widget)"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_bottom_button_text_c",
+        "label": "Button text",
+        "default": "Confirm Address"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_bg_c",
+        "label": "Button color",
+        "default": "#BD3B10"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_text_color_c",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_bottom_btn_border_color_c",
+        "label": "Button border color",
+        "default": "#BD3B10"
+      }
+    ]
+  },
+  {
+    "name": "Crowd Control Widget",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social General"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_social_title",
+        "label": "Social media title",
+        "default": "Get Social"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_widget_social_style",
+        "label": "Display style",
+        "options": [
+          {
+            "value": "style1",
+            "label": "Light icons"
+          },
+          {
+            "value": "style2",
+            "label": "Dark icons"
+          },
+          {
+            "value": "style3",
+            "label": "Colored icons"
+          }
+        ],
+        "default": "style1"
+      },
+      {
+        "type": "header",
+        "content": "Instagram"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_enable_instagram",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_instagram_title",
+        "label": "Title",
+        "default": "Instagram"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl_widget_instagram_embedcode",
+        "label": "Embed code",
+        "default": "<blockquote class=\"instagram-media\" data-instgrm-permalink=\"https:\/\/www.instagram.com\/p\/bNd86MSFv6\/\" data-instgrm-version=\"8\" style=\" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);\"><div style=\"padding:8px;\"> <div style=\" background:#F8F8F8; line-height:0; margin-top:40px; padding:50% 0; text-align:center; width:100%;\"> <div style=\" background:url(data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC\/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5\/P8\/t9FuRVCRmU73JWlzosgSIIZURCjo\/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI\/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf\/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;\"><\/div>\n<\/div>\n<p style=\" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;\"><a href=\"https:\/\/www.instagram.com\/p\/bNd86MSFv6\/\" style=\" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;\" target=\"_blank\">A post shared by Alberto Tretti (@alberto.t)<\/a> on <time style=\" font-family:Arial,sans-serif; font-size:14px; line-height:17px;\" datetime=\"2013-07-01T04:46:31+00:00\">Jun 30, 2013 at 9:46pm PDT<\/time><\/p>\n<\/div><\/blockquote>\n<script async=\"\" defer src=\"\/\/www.instagram.com\/embed.js\"><\/script>"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_instagram_so",
+        "label": "Sort order",
+        "default": "1"
+      },
+      {
+        "type": "header",
+        "content": "Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_enable_facebook",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_facebook_title",
+        "label": "Title",
+        "default": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_facebook_url",
+        "label": "Facebook Page URL",
+        "default": "https:\/\/www.facebook.com\/facebook",
+        "info": "ex: https:\/\/www.facebook.com\/facebook"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_facebook_so",
+        "label": "Sort order",
+        "default": "2"
+      },
+      {
+        "type": "header",
+        "content": "Youtube"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_enable_youtube",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_youtube_title",
+        "label": "Title",
+        "default": "Youtube"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_youtube_channel",
+        "label": "Channel",
+        "default": "GoogleDevelopers"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_youtube_so",
+        "label": "Sort order",
+        "default": "3"
+      },
+      {
+        "type": "header",
+        "content": "Twitter"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_enable_twitter",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_twitter_title",
+        "label": "Title",
+        "default": "Twitter"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_twitter_scrname",
+        "label": "Screen name",
+        "default": "TwitterDev"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_twitter_so",
+        "label": "Sort order",
+        "default": "4"
+      },
+      {
+        "type": "header",
+        "content": "Pinterest"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_enable_pinterest",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_pinterest_title",
+        "label": "Title",
+        "default": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_pinterest_url",
+        "label": "Profile URL",
+        "default": "https:\/\/www.pinterest.com\/pinterest\/",
+        "info": "Pinterest profile url. ex: https:\/\/www.pinterest.com\/pinterest\/"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_pinterest_so",
+        "label": "Sort order",
+        "default": "5"
+      },
+      {
+        "type": "header",
+        "content": "Survey Widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_survey_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_survey_title",
+        "label": "Title",
+        "default": "Give us some feedback"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl_widget_survey_embedcode",
+        "label": "Embed code",
+        "default": "<script defer>(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type=\"text\/javascript\",c.async=!0,c.id=n,c.src=[\"https:\"===location.protocol?\"https:\/\/\":\"http:\/\/\",\"widget.surveymonkey.com\/collect\/website\/js\/tRaiETqnLgj758hTBazgdzLdWX6a02CkUxoUDDL1g3XS95ZjXxHZhsiMqURVZXIp.js\"].join(\"\"),a.parentNode.insertBefore(c,a))})(window,document,\"script\",\"smcx-sdk\");<\/script>"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_widget_survey_bgcolor",
+        "label": "Background color",
+        "default": "#BCCCD4"
+      },
+      {
+        "type": "header",
+        "content": "Referral Widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_referral_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_referral_title",
+        "label": "Title",
+        "default": "Refer a friend"
+      },
+      {
+        "type": "textarea",
+        "id": "crwdctrl_widget_referral_embedcode",
+        "label": "Embed code",
+        "default": "<iframe id=\"refcandy-candyjar\" data-id=\"s21gguwj6zw3k7ep6e0xupfp2\" data-height=\"715\" data-width=\"100%\" frameborder=0><\/iframe><script defer>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"\/\/portal.referralcandy.com\/assets\/widgets\/refcandy-candyjar.js\";fjs.parentNode.insertBefore(js,fjs);}})(document,\"script\",\"refcandy-candyjar-js\");<\/script>"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_widget_referral_bgcolor",
+        "label": "Background color",
+        "default": "#E6E6E6"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter Widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "crwdctrl_widget_newsletter_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Bottom Button"
+      },
+      {
+        "type": "select",
+        "id": "crwdctrl_widget_redirect",
+        "label": "Redirection",
+        "default": "checkout",
+        "info": "Redirect on the  bottom \"Next\" button",
+        "options": [
+          {
+            "value": "checkout",
+            "label": "Checkout"
+          },
+          {
+            "value": "cart",
+            "label": "Cart page"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_btmbtn_text",
+        "label": "Button text",
+        "default": "Next"
+      },
+      {
+        "type": "text",
+        "id": "crwdctrl_widget_btmbtn_bradius",
+        "label": "Button corner radius",
+        "default": "3px"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_widget_btmbtn_bg",
+        "label": "Button color",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_widget_btmbtn_text_color",
+        "label": "Button text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "crwdctrl_widget_btmbtn_border_color",
+        "label": "Button border color",
+        "default": "#ff0000"
+      }
+    ]
+  }
+]

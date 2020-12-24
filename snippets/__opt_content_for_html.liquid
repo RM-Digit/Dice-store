@@ -1,0 +1,13 @@
+{% comment %} {%- capture __html -%}
+	{% include '__opt-minified', minified: html %}</body></html>
+{%- endcapture -%} {% endcomment %}
+
+{%- capture __html -%}
+	{{ html }}
+{%- endcapture -%}
+
+{%- assign html = __html
+	| replace: '<iframe width="560" height="315" src="', '<iframe class="lazyload-later" width="560" height="315" data-src="'
+ -%}
+
+{{ html }}

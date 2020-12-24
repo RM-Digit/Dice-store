@@ -1,0 +1,95 @@
+<script>
+	var js_template_name = '{{ template.name }}';
+
+	{% comment %}Wholesale Hero JS{% endcomment %}  
+	window.wh_metafields = {};
+	window.wh_discount_value = 1; 
+	window.settings = {{settings | json}};
+
+	{% if customer.tags.size > 0 %}
+		window.wh_customer_tags = true;
+		{% assign wh_logged_in = true %}
+		{% assign wh_settings_cart_type = 'page' %} 
+			window.settings['cart_type'] = 'page';
+	{% else %}
+		{% assign wh_logged_out = true %}
+		{% assign wh_settings_cart_type = settings.cart_type %} 
+			window.settings['cart_type'] = '{{ settings.cart_type }}';
+	{% endif %}
+
+	var theme = {
+		strings: {
+			addToCart: {{ 'products.product.add_to_cart' | t | json }},
+			soldOut: {{ 'products.product.sold_out' | t | json }},
+			unavailable: {{ 'products.product.unavailable' | t | json }}
+		},
+		moneyFormat: {{ shop.money_format | json }}
+	}
+
+	window.mlvedaShopCurrency = "{{ shop.currency }}";
+	window.shopCurrency = "{{ shop.currency }}";
+	window.supported_currencies = "{{ settings.supported_currencies }}";
+
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'AW-1068530349', {
+		'send_page_view': false
+	});		
+
+	{% if newHash %}
+		$(function() {
+			timber.updateHash('{{ newHash }}');
+		});
+	{% endif %}
+	{% if resetPassword %}
+		$(function() {
+			timber.resetPasswordSuccess();
+		});
+	{% endif %}
+</script>
+
+<script type="text/javascript">
+	var ccurlParams;
+	(window.onpopstate = function () {
+		var match,
+			pl     = /\+/g,  // Regex for replacing addition symbol with a space
+			search = /([^&=]+)=?([^&]*)/g,
+			decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+			query  = window.location.search.substring(1);
+	ccurlParams = {};
+	while (match = search.exec(query))
+	ccurlParams[decode(match[1])] = decode(match[2]);
+	})();
+	if (ccurlParams["discount"] != (''||null) && typeof ccurlParams["discount"] != ('undefined'||undefined)) {
+	   sessionStorage.setItem("crwdctrl_discount", ccurlParams["discount"]);
+	}
+	{% if template contains 'cart' %}
+	var discElems = document.querySelectorAll('form[action="/cart"] input[name="discount"]');
+	var ccdiscount = sessionStorage.getItem("crwdctrl_discount");
+	if(ccdiscount == ('' || null)) {
+	  ccdiscount = sessionStorage.getItem("discount");
+	}
+	if(discElems.length <= 0) {
+	  if(ccdiscount != ('' || null)) {
+		var discElem = document.createElement("INPUT");
+		discElem.setAttribute("type", "hidden");
+		discElem.setAttribute("name", "discount");
+		discElem.value = ccdiscount;
+		var chkoutBtns = document.getElementsByName("checkout");
+		for(i=0;i<chkoutBtns.length;i++) {
+		  chkoutBtns[i].parentNode.insertBefore(discElem, chkoutBtns[i]);
+		}
+	  }
+	} else {
+	  for(i=0;i<discElems.length;i++) {
+		if(ccdiscount != ('' || null)) {
+		  discElems[i].value = ccdiscount;
+		} else {
+		  discElems[i].remove();
+		}
+	  }
+	}
+	{% endif %}
+</script>

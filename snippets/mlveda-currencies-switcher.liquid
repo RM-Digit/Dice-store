@@ -1,0 +1,35 @@
+{% if settings.show_multiple_currencies %}
+
+<script>
+var mlvedasw = '<div class = "pick_currency "  style="display: none; ">'+
+  '<select id="currencies" name="currencies" style="display: inline;">'+
+  {% capture codes %}USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,ILS,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK{% endcapture %}
+  {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+'<option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>'+
+  {% for code in supported_codes %}
+    {% if code != shop.currency and codes contains code %}
+    '<option value="{{ code }}">{{ code }}</option>'+
+    {% endif %}
+  {% endfor %}
+'</select>'+
+'</div>';
+
+$(".nav--mobile .mldBlock .header-cart").after(mlvedasw);
+var clr1 = jQuery("select#currencies").css("color");
+var clr2 = jQuery("select#currencies1").css("color");
+jQuery("select#currencies").css("background-image","url('data:image/svg+xml,<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"8pxz\" height=\"5px\" viewBox=\"0 0 8 5\" enable-background=\"new 0 0 8 5\" xml:space=\"preserve\"> <path fill=\""+clr1+"\" d=\"M0,0c0,0,3.4,4.4,3.5,4.4C3.7,4.4,7.1,0,7.1,0H0z\"/></svg>')");
+jQuery("select#currencies1").css("background-image","url('data:image/svg+xml,<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"8pxz\" height=\"5px\" viewBox=\"0 0 8 5\" enable-background=\"new 0 0 8 5\" xml:space=\"preserve\"> <path fill=\""+clr2+"\" d=\"M0,0c0,0,3.4,4.4,3.5,4.4C3.7,4.4,7.1,0,7.1,0H0z\"/></svg>')");
+  
+</script>
+
+<style>
+select#currencies {
+background-repeat: no-repeat;
+      background-position: right center;
+     background-image: url("{{ 'mlblack.svg' | asset_url }}");     
+    
+}
+</style>
+
+
+{% endif %}

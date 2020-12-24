@@ -1,0 +1,84 @@
+{% comment %} 
+https://obfuscator.io/
+https://www.epochconverter.com/
+{% endcomment %}
+
+{% comment %}
+{%- capture obus -%}
+document.addEventListener('StartKernelLoading', function() {
+	engine.kernel();
+})
+document.addEventListener('StartTrekkieLoading', function(event) {
+	engine.trekkie();
+});
+{%- endcapture -%}
+{% endcomment %}
+
+{% comment %} 
+{%- capture obus1 -%}
+function obus1(asyncLoadArr,urls,i) {
+  asyncLoadArr[i+1] = urls[i];
+}
+obus1(asyncLoadArr,urls,i);
+{%- endcapture -%} {% endcomment %}
+
+{% comment %} {% capture obus2 %}
+document.addEventListener("StartAsyncInit", function(event)
+{
+	asyncLoad();
+});
+{% endcapture %}
+{% endcomment %}
+
+{% comment %} 
+{%- capture obus3 -%}
+function obus3(asyncLoadArr, src) {
+asyncLoadArr[0] = src;}
+obus3(asyncLoadArr,eventsListenerScript.src)});
+{%- endcapture -%} 
+{% endcomment %}
+
+
+{% comment %} 
+{%- capture obus4 -%}
+var asyncLoadArr = []; var asyncLoadFaster = []; var asyncLoadLater = [];
+var j = 0; var k = 0;
+
+//if old version of code
+//var engine = {};var template_name='{{ template.name }}';var __engine_loaded=[];var __engine_scriptsloading=[];var __engine_scriptsloaded=[];var __engine_other=[];
+//document.addEventListener("DOMContentLoaded", function(event) 
+//{
+	//setTimeout(function(){
+		//document.dispatchEvent(new CustomEvent('StartAsyncInit'));
+		//console.log('StartAsyncInit');
+	//}, 1500);	
+//});
+
+var asyncLoadArr = []; var asyncLoadFaster = []; var asyncLoadLater = [];
+var j = 0; var k = 0;
+
+document.addEventListener("StartAsyncInit", function(event) {
+	setTimeout(function(){
+		if (typeof engine.jsqueue === "function") { 
+			engine.jsqueue(asyncLoadArr, asyncLoadFaster, asyncLoadLater);
+		}
+	}, 100);
+
+	setTimeout(function(){
+		document.dispatchEvent(new CustomEvent('StartAsyncFasterLoading'));
+	}, 500);
+});
+
+document.addEventListener("StartAsyncFasterLoading", function(event) {
+	for (var i = 0; i < asyncLoadFaster.length; i++) {
+		loadJS(asyncLoadFaster[i]);
+	}
+});
+
+document.addEventListener("StartAsyncLoading", function(event) {
+	for (var i = 0; i < asyncLoadLater.length; i++) {
+		loadJS(asyncLoadLater[i]);
+	}
+});
+{%- endcapture -%}
+{% endcomment %}

@@ -1,0 +1,97 @@
+{% comment %} Example to insert {% endcomment %}
+{% comment %} 
+{%
+  include "__opt-image",
+  image: block.settings.image,
+  widths: '600, 600',
+  class: 'lazyload-later'
+%}
+
+{%
+  include "__opt-image",
+  image: block.settings.image,
+  full_width: true
+%}
+
+{% if section.settings.image %}
+  {%
+    include "__opt-image",
+    image: section.settings.image,
+    class: 'lazyload-later',
+    full_width: true
+  %}
+{% else %}
+  {%
+    include "__opt-image-placeholder",
+    type: "lifestyle",
+    aspect_ratio: 1.45,
+    placeholder_index: 2
+  %}
+{% endif %}
+
+{% endcomment %}
+
+{% assign class = false %}
+{% assign preload = false %}
+{% assign full_width = false %}
+{% assign image_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+{% assign widths = '295,394,590,700,800,1000,1200,1500,1800,2000,2400' %}
+{% assign widths = widths | split: ',' %}
+{% assign max_height = 0 %}
+
+{% capture valid_widths %}
+  {% for width in widths %}
+    {% assign width_int = width | plus: 0 %}
+    {% if image.width >= width_int %}{{ width_int }},{% endif %}
+  {% endfor %}
+  {{ image.width }}
+{% endcapture %}
+
+{% assign widths = valid_widths | strip_newlines | remove: ' ' %}
+
+{% assign lazy_classes = 'lazyload' %}
+
+{%- if class -%}
+	{% assign lazy_classes = class %}
+{%- endif -%}
+
+{% if preload %}
+  {% assign lazy_classes = lazy_classes | append: ' lazypreload' %}
+{% endif %}
+
+{% assign width = image.width | append: "px" %}
+{% if max_height > 0 %}
+  {% assign width = max_height | times: image.aspect_ratio | round: 2 | append: 'px' %}
+{% elsif full_width %}
+  {% assign width = "100%" %}
+{% endif %}
+
+
+
+<div
+  class="image--root"
+  data-aspectratio="{{ image.aspect_ratio }}"
+  style="width: {{ width }};"
+  {{ custom_attributes }}
+>
+  <div
+    class="image--container"
+    style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"
+  >
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" loading="lazy"
+      class="{{ lazy_classes }}"
+      data-src="{{ image_url }}"
+      data-sizes="auto"
+      data-widths="[{{ widths }}]"
+      data-aspectratio="{{ image.aspect_ratio }}"
+      alt="{{ image.alt | escape }}"
+    >
+  </div>
+
+  <noscript>
+    <img loading="lazy"
+      src="{{ image | img_url: '600x600' }}"
+      alt="{{ image.alt | escape }}"
+    >
+  </noscript>
+</div>

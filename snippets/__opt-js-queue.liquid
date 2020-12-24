@@ -1,0 +1,38 @@
+<script>
+engine.jsqueue = function(asyncLoadArr, asyncLoadFaster, asyncLoadLater) {
+	for (var i = 0; i < asyncLoadArr.length; i++) {
+		if(!asyncLoadArr[i]) 
+		{
+			continue;
+		}		
+		if(asyncLoadArr[i].indexOf('example.com') !== -1)
+		{
+			asyncLoadFaster[j] = asyncLoadArr[i];
+			j++;
+		}
+		else if(asyncLoadArr[i].indexOf('example.com') !== -1)
+		{
+			//template_name - if you want to use only for certain template
+			if(template_name == 'product')
+			{
+				asyncLoadFaster[j] = asyncLoadArr[i];
+				j++;
+			}
+		}	
+		else if(asyncLoadArr[i].indexOf('example.com') !== -1)
+		{
+			//canonical_url - if you want to use only for certain page
+			if(canonical_url.indexOf('contact-us') !== -1)
+			{
+				asyncLoadFaster[j] = asyncLoadArr[i];
+				j++;
+			}
+		}										
+		else
+		{
+			asyncLoadLater[k] = asyncLoadArr[i];
+			k++;
+		}
+	}
+}
+</script>

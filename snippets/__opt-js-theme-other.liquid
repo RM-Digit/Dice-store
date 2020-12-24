@@ -1,0 +1,206 @@
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ '__opt_libs.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ '____opt_libs.js' | asset_url }}"></script><![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'modernizr.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'modernizr.min.js' | asset_url }}"></script><![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'ajaxify.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ 'ajaxify.min.js' | asset_url }}"></script><![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!--><script src="{{ '__opt_shop.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+<!--[if lte IE 9]><script src="{{ '__opt_shop.js' | asset_url }}"></script><![endif]-->
+
+<script>
+console.log('__opt-js-theme-other-1.0147');
+
+engine.loaded = function()
+{
+	
+}
+
+engine.scriptsloading = function()
+{
+	loadJS('{{ '__opt_buddha-megamenu.js' | asset_url }}', function()
+	{
+		loadCSS('{{ '__opt_menu.css' | asset_url }}');
+	});
+}
+
+engine.scriptsloaded = function()
+{
+	document.dispatchEvent(new CustomEvent('StartCssLoading'));
+
+	loadJS('{{ 'onsite.js' | asset_url }}', function()
+	{
+		setTimeout(function(){
+	    klaviyo.init({
+	      account: 'pe35sg',
+	      platform: 'shopify'
+	    });
+	    klaviyo.enable('backinstock',{ 
+	    trigger: {
+	      product_page_text: 'Notify Me When Available',
+	      product_page_class: 'btn',
+	      product_page_text_align: 'center',
+	      product_page_margin: '0px',
+	      replace_anchor: false
+	    },
+	    modal: {
+	     headline: '{product_name}',
+	     body_content: 'Register to receive a notification when this item comes back in stock.',
+	     button_label: 'Notify me when available',
+	     footer_content: '',
+	     additional_styles: "@import url('https://fonts.googleapis.com css?family=Helvetica+Neue');",
+	     drop_background_color: '#000',
+	     background_color: '#fff',
+	     text_color: '#222',
+	     button_text_color: '#fff',
+	     button_background_color: '#439fdb',
+	     close_button_color: '#ccc',
+	     error_background_color: '#fcd6d7',
+	     error_text_color: '#C72E2F',
+	     success_background_color: '#d3efcd',
+	     success_text_color: '#1B9500'
+	    }
+	  });
+		}, 500);
+	});
+
+	$('#__load-section-footer').load("{{ shop.url }}?section_id=footer");
+
+	setTimeout(function() {
+
+		(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-WDVQS8D');
+	}, 300);
+}
+
+engine.other = function()
+{
+	engine.theme_footer();
+
+	loadJS('https://www.googletagmanager.com/gtag/js?id=AW-1068530349');
+
+	/* loadJS('https://lq3-production.s3.amazonaws.com/lead_quizzes_3.0/tracking/js/properties/7snvseusjegg9q.js'); */
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93893703-1', 'auto', {allowLinker: true});
+    ga('require', 'linker');
+    ga('linker:autoLink', ['skullsplitterdice.com', 'checkout.shopify.com']);
+    ga('require', 'displayfeatures');
+
+	{% if template contains 'product' %}   
+		
+	ga('set','dimension1','shopify_US_{{ product.id }}_{{ product.variants.first.id }}');          
+	ga('set','dimension2','product');      
+	ga('set','dimension3','{{ product.price | money_without_currency }}');     
+	
+	{% elsif template contains 'cart' %}
+
+		{% if cart.item_count > 1 %} 
+					ga('set','dimension1','[{% for item in cart.items %}shopify_US_{{ item.product.id }}_{{ item.variant.id }}{% if forloop.last != true %},{% endif %}{% endfor %}]');
+		{% elsif cart.item_count == 1 %}
+					ga('set','dimension1','{% for item in cart.items %}shopify_US_{{ item.product.id }}_{{ item.variant.id }}{% endfor %}');
+		{% else %}
+					ga('set','dimension1','');
+		{% endif %}
+
+		ga('set','dimension2','cart');
+		ga('set','dimension3','{{ cart.total_price | money_without_currency }}');
+			
+	{% elsif template contains 'collection' %}
+		
+		ga('set','dimension1','');
+		ga('set','dimension2','category');
+		ga('set','dimension3','');
+	
+		{% elsif template contains 'search' %}
+		
+		ga('set','dimension1','');
+		ga('set','dimension2','searchresults');
+		ga('set','dimension3','');
+	
+		{% elsif template contains 'index' %}
+	
+		ga('set','dimension1','');
+		ga('set','dimension2','home');
+		ga('set','dimension3','');
+	
+		{% else %}
+	
+		ga('set','dimension1','');
+		ga('set','dimension2','other');
+		ga('set','dimension3','');
+	
+	{% endif %}
+	
+    ga('send', 'event', 'customdimensionsend', 'customdimensionsend', {'nonInteraction': 1});
+
+	(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"25050200"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+
+	{% unless wh_settings_cart_type == 'page' %}
+		{% unless template.name == 'product' %}
+			jQuery(document).ready(function(){
+				ajaxifyShopify.init({
+					method: 'modal',
+					wrapperClass: 'wrapper',
+					formSelector: '.product-form',
+					addToCartSelector: '.addToCart',
+					cartCountSelector: '.cartCount',
+					cartCostSelector: '.cartCost',
+					toggleCartButton: '.CartToggle',
+					useCartTemplate: true,
+					btnClass: 'btn',
+					moneyFormat: {{ shop.money_format | json }},
+					disableAjaxCart: false,
+					enableQtySelectors: true,
+					prependDrawerTo: 'body',
+					onToggleCallback: function(){
+						jQuery('body').trigger('ajaxCart.afterCartLoad')
+					}
+				});
+			});			
+		{% endunless %}
+	{% endunless %}
+
+	loadJS('//static.klaviyo.com/onsite/js/klaviyo.js?company_id=pe35sg');
+
+	{% if customer.tags.size > 0 and template != 'cart' %}
+		$(function(){
+			$(document).on('click', "a[href$='#cart'], input[name='checkout'], button[name='checkout'], input[name='goto_pp'], button[name='goto_pp'], input[name='goto_gc'], button[name='goto_gc'], [href$='checkout']", function(e){
+				e.preventDefault();
+				window.location = "/cart";
+			});
+		});
+	{% endif %}
+
+	
+
+
+}
+</script>
+
+{% if template contains 'customers' %}
+	{{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+{% endif %}
+
+{% unless wh_settings_cart_type == 'page' %}
+	{% include 'ajax-cart-template' %}
+{% endunless %}
+
+{% if customer.tags.size > 0 and template == 'cart' %}
+	{% include 'wh_cart' %}
+{% endif %}
+
+{% include 'oldIE-js' %}
+{% include '__opt_bold-common' %}
+{% include 'adolab-get-clicked-seo' %}
+{% include 'lp-dynamic-remarketing' %}
+{% include 'smile-initializer' %} 

@@ -1,0 +1,100 @@
+{% comment %} <div class="wrapper slider-wrapper">
+  <div class="slick-slider">
+    {% for block in section.blocks %}
+    <div><a href="{{ block.settings.slider_link }}">		
+					<img class="lazyload" data-src="{{ block.settings.custom_image | img_url:'300x', format: 'pjpg' }}">
+		</a></div>
+    {% endfor %}
+  </div>
+</div> {% endcomment %}
+
+<style>
+@media (max-width:640px){.nhps__container{height:auto}}
+@media (min-width:1024px){.nhps__container{height:680px !important}}
+</style>
+
+<div class="nhps__container">
+    <div class="wrapper">
+			{% for block in section.blocks %}
+				{% if forloop.first == true %}
+					<div class="nhps__cover">
+							<a
+									class="nhps__cover-link background-image"
+									href="{{ block.settings.slider_link }}"
+									data-background-mobile="{{ block.settings.custom_image | img_url:'500x', format: 'pjpg' }}"
+									data-background-desktop="{{ block.settings.custom_image | img_url:'1200x', format: 'pjpg' }}"
+							></a>
+					</div>
+        <div class="nhps__slides">
+				<ul class="nhps__slides-list">					
+						{% else %}
+							<li class="nhps__slide">
+									<a
+											class="nhps__slide-link background-image"
+											href="{{ block.settings.slider_link }}"
+											data-background-mobile="{{ block.settings.custom_image | img_url:'500x', format: 'pjpg' }}"
+											data-background-desktop="{{ block.settings.custom_image | img_url:'400x', format: 'pjpg' }}"
+									></a>
+							</li>					
+						{% endif %}			
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Homepage slider",
+    "max_blocks": 6,
+    "settings": [
+      {
+         "type": "select",
+         "id": "auto_speed",
+         "options": [
+			{ "value": "1000", "label": "1 Seconds"},
+            { "value": "2000", "label": "2 Seconds"},
+            { "value": "3000", "label": "3 Seconds"},
+            { "value": "4000", "label": "4 Seconds"},
+            { "value": "5000", "label": "5 Seconds"},
+            { "value": "6000", "label": "6 Seconds"},
+            { "value": "7000", "label": "7 Seconds"}
+         ],
+         "label": "Interval of Autorotation",
+         "default": "3000"
+      }
+	],
+    "blocks": [
+      {
+        "type": "select",
+        "name": "Add Blocks",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "custom_image",
+            "label": "Image"
+          },
+          {
+            "id": "slider_link",
+            "type": "url",
+            "label": "Slider link"
+          }
+        ]
+      }
+	],
+    "presets": [
+      {
+      "name": "Homepage slider",
+      "category": "Image",
+      "blocks": [
+        { 
+          "type": "select"
+        },
+        {
+          "type": "select"
+        }
+      ]
+      }
+    ]
+  }
+{% endschema %}

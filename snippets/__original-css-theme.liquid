@@ -1,0 +1,16 @@
+{% include '__opt-css-theme-fonts' %}
+
+<style>.lazyload{opacity:0}.lazyloading{opacity:1;transition:opacity .3s;background:#f7f7f7 url("{{'__opt_loader.gif' | asset_url}}") no-repeat center}.lazyloaded{opacity:1;transition:opacity 9ms}</style>
+
+<style>
+.main-menu a
+{
+	color:#FFFFFF !important;
+}
+</style>
+
+{% include '__opt-css-style' %}
+
+{% comment %} {{ 'style.scss.css' | asset_url | stylesheet_tag }} {% endcomment %}
+
+{% comment %} {% include '__original-css-theme' %} {% endcomment %}

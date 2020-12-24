@@ -1,0 +1,133 @@
+{%- if request.host contains 'myshopify.com' -%}
+	{%- assign is_admin_interface = true -%}
+{%- else -%}
+	{%- assign is_admin_interface = false -%}
+{%- endif -%}
+
+{%- if template.name == 'cart' -%}
+	{%- assign is_admin_interface = true -%}
+{%- endif -%}
+
+{%- if request.host contains 'shopifypreview.com' -%}
+	{%- assign is_admin_interface = true -%}
+{%- endif -%}
+
+{%- capture html -%}
+<!doctype html>
+	<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+	<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+	<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+	<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+	<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+
+	<head>
+		<meta name="google-site-verification" content="XEcFpfQQ4LeA3ae8DDyhrIuZnZCMs5iHpVfcP9dKdPk" />
+		<meta name="p:domain_verify" content="436f525f38f28036b4cce993257c0ba1"/>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		{% if settings.favicon != blank %}
+			<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+		{% endif %}
+
+		<title>
+		{{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+		</title>
+
+		{% if page_description %}
+		<meta name="description" content="{{ page_description | escape }}">
+		{% endif %}
+
+		{% include 'social-meta-tags' %}
+
+		<link rel="canonical" href="{{ canonical_url }}">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="theme-color" content="{{ settings.color_primary }}">
+		<meta name="google-site-verification" content="lHMBSozZL7C_p_LeuWTiIv4LVt8Wky10fMOohn6nsyc" />
+		<meta name="google-site-verification" content="6bzKrDxW8bk_dXwxf1H9h0oGT8ZR4sHiOGQLArRO0rA" />	
+
+		{% include 'buddha-megamenu-before' %}
+		{% include '__opt_buddha-megamenu' %}
+
+		{% capture buddha-megamenu_original %}
+		{% include 'buddha-megamenu' %}
+		{% endcapture %}
+
+		<script>
+		var engine = {};var is_admin_interface={{ is_admin_interface }};var template_name='{{ template.name }}';var __engine_loaded=[];var __engine_scriptsloading=[];var __engine_scriptsloaded=[];var __engine_other=[];var canonical_url='{{ canonical_url }}';var shogun_page=false;
+		</script>
+
+		{%- if is_admin_interface -%}
+			{% render 'header-scripts.zipifypages', renderctx: 'thm' %}{{ content_for_header }}
+		{%- else -%}
+			{% include '__opt-js-content-for-header' %}
+			{{ js_content_for_header }}
+		{%- endif -%}
+
+		{% include '__opt-css-theme' %}
+		{% include '__opt-js-jquery' %}
+		{% include 'shop-sheriff-amp' %}
+	
+
+
+
+</head>
+
+	<body style="opacity:{%- if is_admin_interface -%}1{%- else -%}0{%- endif -%};" id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+		
+		{% include 'buddha-megamenu-wireframe' %}
+
+		{% section 'header' %}
+
+		<main class="main-content" role="main">    
+			{{ content_for_layout }}
+			<div id="carousel-widget" style="max-width: 1000px; margin-left: auto; margin-right: auto;"></div>
+		</main>
+
+ 		<br>
+      
+		{%- if is_admin_interface -%}
+			{% section 'footer' %}
+		{%- else -%}
+			<div id="__load-section-footer"></div>
+		{%- endif -%}
+
+		<script id="JsQty" type="text/template">
+		{% raw %}
+			<div class="js-qty">
+				<button type="button" class="js-qty__adjust js-qty__adjust--minus" data-id="{{id}}" data-qty="{{itemMinus}}">&minus;</button>
+				<input type="text" class="js-qty__num QuantityInput" value="{{itemQty}}" min="1" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}" data-submit="{{submit}}">
+				<button type="button" class="js-qty__adjust js-qty__adjust--plus" data-id="{{id}}" data-qty="{{itemAdd}}">+</button>
+			</div>
+		{% endraw %}
+		</script>
+		
+		<script id="JsQty--cart" type="text/template">
+		{% raw %}
+			<div class="js-qty">
+				<button type="button" class="js-qty__adjust js-qty__adjust--minus" data-id="{{id}}" data-qty="{{itemMinus}}">&minus;</button>
+				<input type="text" value="{{itemQty}}" class="js-qty__num QuantityInput"  min="1" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*" name="updates[]" id="updates_{{id}}" data-submit="{{submit}}">
+				<button type="button" class="js-qty__adjust js-qty__adjust--plus" data-id="{{id}}" data-qty="{{itemAdd}}">+</button>
+			</div>
+		{% endraw %}
+		</script>
+
+		{% include '__opt-js-theme-main' %}
+		{% include '__opt-css-theme-footer' %}
+
+		{%- unless is_admin_interface -%}
+			{{ js_content_for_header_defer 
+			| strip_newlines 
+			| replace: 'src="', 'data-src="'
+			| replace: '<script', '<script class="opt_defer"' 
+			}}
+		{%- endunless -%}
+            
+	{% render 'page-footer.zipifypages', renderctx: 'thm', ocuapp: ocuapp %}<!-- Begin ReCharge code -->
+{% include 'subscription-theme-footer' %}
+<!-- End ReCharge code -->
+{% if customer %} <div id="shopmsg-customer-helper" data-id="{{ customer.id }}" style="display:none;"></div>{% endif %}</body>
+</html>
+{%- endcapture -%}
+
+{% include '__opt_content_for_html' %}

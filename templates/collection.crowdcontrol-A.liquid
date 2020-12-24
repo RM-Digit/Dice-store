@@ -1,0 +1,1623 @@
+{% assign reward_product_layout = 'horizontal' %}
+{% assign reward_product_vartype = 'dropdown' %}
+{% assign reward_grid_width_hor = ' crowd-col-6' %}
+
+{% if settings.crwdctrl_reward_product_view contains 'box' %} 
+{% assign reward_product_vartype = 'box' %}
+{% endif %} 
+{% if settings.crwdctrl_reward_product_view contains 'dropdown' %}
+{% assign reward_product_vartype = 'dropdown' %}
+{% endif %}
+
+{% assign reward_grid_width = 'crowd-col-12' %}
+
+{% assign upsell_product_layout = 'horizontal' %}
+{% assign upsell_product_vartype = 'dropdown' %}
+{% assign upsell_grid_width_hor = '' %}
+{% if settings.crwdctrl_upsell_product_view contains 'vertical' %} 
+{% assign upsell_product_layout = 'vertical' %}
+{% endif %} 
+{% if settings.crwdctrl_upsell_product_view contains 'horizontal' %}
+{% assign upsell_product_layout = 'horizontal' %}
+{% assign upsell_grid_width_hor = ' crowd-col-6' %}
+{% endif %}
+{% if settings.crwdctrl_upsell_product_view contains 'box' %} 
+{% assign upsell_product_vartype = 'box' %}
+{% endif %} 
+{% if settings.crwdctrl_upsell_product_view contains 'dropdown' %}
+{% assign upsell_product_vartype = 'dropdown' %}
+{% endif %}
+
+{% assign upsell_grid_width = 'crowd-col-12' %}
+{% if upsell_product_layout == 'vertical' %}
+{% case settings.crwdctrl_upsell_prod_per_row %}
+  {% when '2' %}
+	{% assign upsell_grid_width = 'crowd-col-6' %}
+  {% when '3' %}
+	{% assign upsell_grid_width = 'crowd-col-4' %}
+  {% when '4' %}
+	{% assign upsell_grid_width = 'crowd-col-3' %}
+  {% when '5' %}
+	{% assign upsell_grid_width = 'crowd-col-2' %}
+  {% else %}
+    {% assign upsell_grid_width = 'crowd-col-12' %}
+{% endcase %}
+{% endif %}
+
+{% assign productsQtys = '' %}
+{% assign productsQtysf = collection.description | strip_html | split: '&lt;products_qty&gt;' %}
+{% if productsQtysf[1] != '' and productsQtysf[1] contains '&lt;/products_qty&gt;' %}
+{% assign productsQtysff = productsQtysf[1] | split: '&lt;/products_qty&gt;' %}
+{% endif %}
+{% if productsQtysff[0] != '' %}
+{% assign productsQtys = productsQtysff[0] | split: ',' %}
+{% endif %}
+
+{% assign reward_prods = '' %}
+{% assign upsell_prods = '' %}
+{% assign upsell_fprods = '' %}
+{% assign replicate_prods = '' %}
+{% for product in collection.products %}
+   {% assign prod_type = product.type | capitalize %}
+   {% assign prod_index = forloop.index0 %}
+   {%if prod_type == 'Reward'%}
+      {% assign reward_prods = reward_prods | append: prod_index | append: ',' %}
+   {% endif %}
+   {%if prod_type != 'Reward'%}
+      {% assign upsell_prods = upsell_prods | append: prod_index | append: ',' %}
+   {% endif %}   
+   {% assign rpcount = '' %}
+   {% for prodrQty in productsQtys %}
+	 {% assign prodrQtyn = prodrQty | replace: product.handle  %}
+	 {% assign prodrQtyt = prodrQtyn | prepend: product.handle  %}
+	 {% if prodrQty == prodrQtyt %}
+	   {% assign fchar = prodrQtyn | strip | slice: 0 %}
+	   {% assign lchar = prodrQtyn | strip | slice: -1, 1 | downcase %}
+	   {% if fchar == '-' and lchar == 'x' %}
+	     {% assign rpcount = prodrQtyn | strip | remove: lchar | ceil | abs %}
+	     {% break %}
+	   {% endif %}
+	 {% endif %}	  
+   {% endfor %}
+   {% if product.tags.size > 0 and rpcount == '' %}
+     {% for rtag in product.tags %}
+       {% assign lchar = rtag | strip | slice: -1, 1 | downcase %}
+       {% assign rpcount = rtag | strip | remove: lchar | ceil %}  	   
+     {% endfor %}
+   {% elsif rpcount == '' %}
+     {% assign rpcount = 0 %}
+   {% endif %}
+   {% assign replicate_prods = replicate_prods | append: rpcount | append: ',' %}
+   {%if prod_type == 'Reward'%}
+	  {% for tag in product.tags %}
+       {% assign tagn = tag | capitalize %}
+       {% if tagn == 'Upsell' %}	     
+		 {% if rpcount > 1 %}
+	       {% assign upsell_fprods = upsell_fprods | append: prod_index | append: ',' %}
+		 {% else %}
+		   {% assign upsell_prods = upsell_prods | append: prod_index | append: ',' %}
+         {% endif %}	   
+       {% endif %}
+      {% endfor %}
+   {% endif %}
+{% endfor %}
+{% assign reward_prods = reward_prods | remove_last: ',' | split: ',' %}
+{% assign upsell_prods = upsell_prods | remove_last: ',' | split: ',' %}
+{% assign upsell_fprods = upsell_fprods | remove_last: ',' | split: ',' %}
+{% assign upsell_prods = upsell_fprods | concat: upsell_prods %}
+{% assign replicate_prods = replicate_prods | remove_last: ',' | split: ',' %}
+<div class="crowdcontrol-collection">
+<div id="crowdcontrol" class="crowdcontrol" style="display: none;">
+<!-- start starter msg -->
+  <div class="cc-welcomebg" style="display:none">
+  <div id="crwdctrl-welcmsg" class="crowdcontrol">
+	{%if settings.crwdctrl-welcmsg-heading !='' %}
+	<h2 class="text-center">{{settings.crwdctrl-welcmsg-heading}}</h2>
+	{%endif%}
+	<hr class="popup_border" />
+	{%if settings.crwdctrl-welcmsg-subheading !='' %}
+	<h3 class="text-center">{{settings.crwdctrl-welcmsg-subheading}}</h3>
+	{%endif%}
+	{%if settings.crwdctrl-welcmsg-text !='' %}
+	<div class="kickstarter-content">
+	  {{settings.crwdctrl-welcmsg-text}}	  
+	</div>
+	{%endif%}
+	{%if settings.crwdctrl-welcmsg-button-text !=''%}
+	<a href="javascript:void(0)" class="popup-btn btn">{{settings.crwdctrl-welcmsg-button-text}}</a>
+	{%endif%}
+  </div>
+  </div>
+<!-- end starter msg -->
+<!-- start returning visitor msg -->
+  <div class="cc-returningbg" style="display:none">
+  <div id="crwdctrl-returningmsg" class="crowdcontrol">
+	{%if settings.crwdctrl-returningmsg-heading !='' %}
+	<h2 class="text-center">{{settings.crwdctrl-returningmsg-heading}}</h2>
+	{%endif%}
+	<hr class="popup_border" />
+	{%if settings.crwdctrl-returningmsg-subheading !='' %}
+	<h3 class="text-center">{{settings.crwdctrl-returningmsg-subheading}}</h3>
+	{%endif%}
+	{%if settings.crwdctrl-returningmsg-text !='' %}
+	<div class="kickstarter-content">
+	  {{settings.crwdctrl-returningmsg-text}}	  
+	</div>
+	{%endif%}
+	{%if settings.crwdctrl-returningmsg-button-text !=''%}
+	<a href="javascript:void(0)" class="popup-btn btn">{{settings.crwdctrl-returningmsg-button-text}}</a>
+	{%endif%}
+  </div>
+  </div>
+<!-- end returning visitor msg -->
+
+  <div class="reward-products {{reward_product_layout}}-layout">	
+	{% for rewdprod in reward_prods %}
+	  {% assign handleindex = rewdprod | abs %}
+	  {% assign product = collection.products[ handleindex ] %}
+	  {% assign flclass = '' %}
+	  {% if forloop.first == true %}
+	    {% assign flclass = ' first' %}
+	  {% endif %}
+	  {% if forloop.last == true %}
+	    {% assign flclass = ' last' %}
+	  {% endif %}
+	  {% assign repcount = replicate_prods[handleindex] | ceil %}
+	  {% assign isDefault = false %}
+	  {% if product.variants.first.title contains 'Default' %}
+        {% assign isDefault = true %}
+	  {% endif %}
+	  {% assign variantSize = product.variants.size %}
+	  {% assign minQty = 1 %}
+	  {% assign extTitle = '' %}
+	  {% if repcount > 1 and variantSize == 1 and isDefault == true %}
+		{% assign minQty = repcount %}
+	  {%endif%}
+	  {% if repcount > 1 and variantSize > 1 and isDefault == false %}{% assign extTitle = extTitle|append:' (1/'|append:repcount|append:')'%}{%elsif repcount > 1 and variantSize == 1 and isDefault == true %}{% assign extTitle = extTitle|append:' ('|append:repcount|append:' items)'%}{% endif %}
+	<div class="crdctrlitem {{reward_grid_width}}{{flclass}}" id="reward-product-{{ product.id }}" data-product="{{ product | json | escape }}">
+      {%unless forloop.index == 1%}{%endunless%}
+	  <div class="hide-product"></div>
+	  <div class="container">
+		<div class="row">
+		  <div class="grid_item{{reward_grid_width_hor}}">
+		    <div class="product-image" id="ProductPhoto">
+					{%- assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
+					
+					{%- assign load_img_src = featured_image | product_img_url: '10x', format: 'pjpg' -%}
+					{%- assign load_img_class = 'image_left' -%}
+					<img
+					{% include '__opt_load_img' src:load_img_src class:load_img_class %}
+					alt="{{ product.title | escape }}" 
+					/>					
+					{% comment %} <img src="{{ featured_image | product_img_url: 'large' }}" alt="{{ product.title | escape }}" class="image_left"/> {% endcomment %}
+		    </div>
+		  </div>
+		  <div class="grid_item{{reward_grid_width_hor}}{% if repcount > 1 %} multiple_item{% endif %}">  
+			<div id="product-detail" class="product-detail varient-{{reward_product_vartype}}">
+		    <h1 class="name">{{ product.title }}{{extTitle}}</h1>
+			  {% if settings.crwdctrl_reward_show_prodprice %}
+			  <div class="product-prices">
+                {% if product.compare_at_price > product.price %}
+                <s class="compare-price money">
+                  {{ product.compare_at_price_max | money }}
+                </s>
+                {% endif %}
+                <span class="price{% if product.compare_at_price > product.price %} sale-price{%endif%} money">
+                  <span>{{ product.price | money }}</span>
+                </span>
+              </div>
+			  {% endif %}
+			  {% if product.description.size > 1 and settings.crwdctrl_reward_show_desc %}              
+			  <div class="product-desc">{{ product.description | split: '<!--details-->' | first | replace: '<div', '<p' | replace: '</div>', '</p>'}}</div>
+			  {% endif %}
+			  <a class="more" data-handle="{{ product.handle }}" href="javascript:void(0);">More Detail</a>
+
+			  <form action="/cart/add/" method="post" enctype="multipart/form-data" id="ccAddToCartForm">
+			    <div class="varients-wrapper">
+				    {% assign variantCount = product.variants | size %}					
+                    {% if product.available %} 
+              		  <select id="reward-product-select-{{product.id}}" name="id" class="product-variants">
+                        {% for variant in product.variants %}
+						{% if variant.available %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+						{% else %}
+						<option disabled="disabled" value="{{ variant.id }}">
+						  {{ variant.title }} - Sold Out
+						</option>
+					    {% endif %}
+                        {% endfor %}
+                      </select>
+					  {%if reward_product_vartype == 'box'%}
+					    {% for option in product.options %}
+					      {% include 'swatch_crowdctrl' with option %}
+					    {% endfor %}
+					  {% endif %}
+					  {% for tag in product.tags %}{% if tag contains 'custom' %}
+						{% assign opttitle = tag | replace: 'custom' | replace: '[' | replace: ']' %}
+						<div class="customopt">
+						  <label>{{opttitle}}</label>
+						  <input type="text" name="properties[{{opttitle}}]" />
+						</div>
+					  {% endif %}{% endfor %}
+                  {% endif %}
+			    </div>
+			    {%if settings.crwdctrl_reward_show_qtyopt %}
+			    <div class="product-quantity clearfx">
+			      <label for="qty-{{product.id}}">Quantity</label>
+				  <div class="pqty">
+					{%if reward_product_vartype == 'dropdown'%}
+					<select name="quantity" data-minqty="{{minQty}}" class="qlty_select">
+					{%for i in (1..10)%}
+					<option value="{{i}}">{{i}}</option>
+					{%endfor%}
+					</select>
+					{%else%}
+					<input type="button" value="-" class="qtyminus" />
+					<input type="text" data-minqty="{{minQty}}" name='quantity' value="1" class="qty" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+					<input type="button" value="+" class="qtyplus" />
+					{%endif%}
+				  </div>
+			    </div>
+			    {%else%}
+				<input type="hidden" data-minqty="{{minQty}}" name="quantity" value="1" />
+			    {%endif%}
+			    <button type="button" name="add" class="btn crowd-cart-btn" data-org-text="Confirm" data-btn-id="reward-{{ forloop.index }}-{{product.id}}">
+				<span id="AddToCartText">Confirm</span>
+			    </button>
+			  </form>			  
+		    </div>
+			{% if repcount > 1 and variantSize > 1 and isDefault == false %}
+			  {% assign pfli = forloop.index %}
+			  {% assign repcnt = repcount | minus: 1 %}
+			  {% for i in (1..repcnt) %}
+			  <div id="product-detail-{{i}}" class="product-detail replicate-detail varient-{{reward_product_vartype}}">
+			  <h1 class="name">{{ product.title }} ({{i|plus:1}}/{{repcount}})</h1>
+			  {% if settings.crwdctrl_reward_show_prodprice %}
+			  <div class="product-prices">
+                {% if product.compare_at_price > product.price %}
+                <s class="compare-price money">
+                  {{ product.compare_at_price_max | money }}
+                </s>
+                {% endif %}
+                <span class="price{% if product.compare_at_price > product.price %} sale-price{%endif%} money">
+                  <span>{{ product.price | money }}</span>
+                </span>
+              </div>
+			  {% endif %}
+			  <form action="/cart/add/" method="post" enctype="multipart/form-data" id="ccAddToCartForm" class="form-{{i}}">
+			    <div class="varients-wrapper">
+				    {% assign variantCount = product.variants | size %}					
+                    {% if product.available %} 
+              		  <select id="reward-product-select-{{product.id}}-{{i}}" name="id" class="product-variants">
+                        {% for variant in product.variants %}
+						{% if variant.available %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+						{% else %}
+						<option disabled="disabled" value="{{ variant.id }}">
+						  {{ variant.title }} - Sold Out
+						</option>
+					    {% endif %}
+                        {% endfor %}
+                      </select>
+					  {%if reward_product_vartype == 'box'%}
+					    {% for option in product.options %}
+					      {% include 'swatch_crowdctrl' with option %}
+					    {% endfor %}
+					  {% endif %}
+					  {% for tag in product.tags %}{% if tag contains 'custom' %}
+						{% assign opttitle = tag | replace: 'custom' | replace: '[' | replace: ']' %}
+						<div class="customopt">
+						  <label>{{opttitle}}</label>
+						  <input type="text" name="properties[{{opttitle}}]" />
+						</div>
+					  {% endif %}{% endfor %}
+                  {% endif %}				  
+			    </div>
+			    {%if settings.crwdctrl_reward_show_qtyopt %}
+			    <div class="product-quantity clearfx">
+			      <label for="qty-{{product.id}}">Quantity</label>
+				  <div class="pqty">
+					{%if reward_product_vartype == 'dropdown'%}
+					<select name="quantity" data-minqty="1" class="qlty_select">
+					{%for i in (1..10)%}
+					<option value="{{i}}">{{i}}</option>
+					{%endfor%}
+					</select>
+					{%else%}
+					<input type="button" value="-" class="qtyminus" />
+					<input type="text" data-minqty="1" name='quantity' value="1" class="qty" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+					<input type="button" value="+" class="qtyplus" />
+					{%endif%}
+				  </div>
+			    </div>
+			    {%else%}
+			    <input type="hidden" data-minqty="1" name="quantity" value="1" />
+			    {%endif%}
+			    <button type="button" name="add" class="btn crowd-cart-btn" data-org-text="Confirm" data-btn-id="reward-{{ pfli }}-{{product.id}}">
+				<span id="AddToCartText">Confirm</span>
+			    </button>
+			  </form>
+			  </div>
+			  {% endfor %}
+			  {% endif %}
+		  </div>		  
+		</div>
+	  </div>
+	</div>
+	{%endfor%}    
+  </div>
+
+  <div class="special-offer">
+    <div class="hide-product"></div>
+    <h2 class="heading">{{settings.special-offer-heading-text}}</h2>
+	{% if settings.special-offer-btns-enable %}
+	<div class="buttons">
+    {%if settings.special-offer-btn1-text !=''%}
+      <button class="takealook">{{settings.special-offer-btn1-text}}</button>
+    {%endif%}
+	{%if settings.special-offer-btn2-text !=''%}
+      <button class="nothanks">{{settings.special-offer-btn2-text}}</button>
+    {%endif%}
+    </div>
+	{% endif %}
+  </div>
+
+  <div id="upsell-id" class="upsell-products {{upsell_product_layout}}-layout">
+    <div class="hide-upsell"></div>  
+    {%if upsell_product_layout == 'vertical'%}
+	<div class="container">
+	<div class="row">
+	{%endif%}
+      {% if settings.crwdctrl_upsell_heading_text !='' %}
+      <div class="heading-main1">
+        <h2>{{settings.crwdctrl_upsell_heading_text}}</h2>
+      </div>
+      {%endif%}
+	  <div class="crdcrtlprods">
+      {% for upslprod in upsell_prods %}
+	  {% assign handleindex = upslprod | abs %}
+	  {% assign product = collection.products[ handleindex ] %}
+	  {% assign flclass = '' %}
+	  {% if forloop.first == true %}
+	    {% assign flclass = ' first' %}
+	  {% endif %}
+	  {% if forloop.last == true %}
+	    {% assign flclass = ' last' %}
+	  {% endif %}
+      <div class="crdctrlitem {{upsell_grid_width}}{{flclass}}" id="upsell-product-{{ product.id }}" data-product="{{ product | json | escape }}">
+		  {%if upsell_product_layout == 'horizontal'%}
+		  <div class="container">
+		  <div class="row">
+		  {%endif%}
+          <div class="grid_item{{upsell_grid_width_hor}}">
+            <div class="product-image" id="ProductPhoto">
+			  {%- assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
+							{%- assign load_img_src = featured_image | product_img_url: '10x', format: 'pjpg' -%}
+							{%- assign load_img_class = 'image_left' -%}
+							<img
+							{% include '__opt_load_img' src:load_img_src class:load_img_class %}
+							alt="{{ product.title | escape }}" 
+							/>				
+              {% comment %} <img src="{{ featured_image | product_img_url: 'large' }}" alt="{{ product.title | escape }}"  class="image_left"/> {% endcomment %}
+            </div>
+          </div>
+          <div class="grid_item{{upsell_grid_width_hor}}">
+			<div id="product-detail" class="product-detail varient-{{upsell_product_vartype}}">
+            <h1 class="name">{{ product.title }}</h1>          		  
+              <div class="product-prices">
+                {% if product.compare_at_price > product.price %}
+                <s class="compare-price money">
+                  {{ product.compare_at_price_max | money }}
+                </s>
+                {% endif %}
+                <span class="price{% if product.compare_at_price > product.price %} sale-price{%endif%} money">
+                  {% if product.compare_at_price > product.price %}Backer pricing {%endif%}<span>{{ product.price | money }}</span>
+                </span>
+              </div>
+             {% if product.description.size > 1 and settings.crwdctrl_upsell_show_desc %}
+                {% if product.description contains '<!--details-->' %}              
+			  	  <div class="product-desc">{{ product.description | split: '<!--details-->' | first | replace: '<div', '<p' | replace: '</div>', '</p>' }}</div>
+			    {% else %}
+			  	  <div class="product-desc"> {{ product.description | strip_html | truncate : 200 | remove:'...'  }}</div>
+			    {% endif %}
+              {% endif %}
+			  <a class="more" data-handle="{{ product.handle }}" href="javascript:void(0);">More Detail</a>
+
+              <form action="/cart/add/" method="post" enctype="multipart/form-data" id="ccAddToCartForm">
+                <div class="varients-wrapper">				
+                    {% if product.available %} 
+              		  <select id="upsell-product-select-{{product.id}}" name="id" class="product-variants">
+                        {% for variant in product.variants %}
+						{% if variant.available %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+						{% else %}
+						<option disabled="disabled" value="{{ variant.id }}">
+						  {{ variant.title }} - Sold Out
+						</option>
+					    {% endif %}
+                        {% endfor %}
+                      </select>
+					  {%if upsell_product_vartype == 'box'%}
+					    {% for option in product.options %}
+					      {% include 'swatch_crowdctrl' with option %}
+					    {% endfor %}
+					  {% endif %}
+					  {% for tag in product.tags %}{% if tag contains 'custom' %}
+						{% assign opttitle = tag | replace: 'custom' | replace: '[' | replace: ']' %}
+						<div class="customopt">
+						  <label>{{opttitle}}</label>
+						  <input type="text" name="properties[{{opttitle}}]" />
+						</div>
+					  {% endif %}{% endfor %}
+                  {% endif %}
+			    </div>               
+                <div class="product-quantity clearfx">
+				  <label for="qty-{{product.id}}">Quantity</label>
+				  <div class="pqty">
+					{%if upsell_product_vartype == 'dropdown'%}
+					<select name="quantity" class="qlty_select" data-minqty="1">
+					{%for i in (1..10)%}
+					<option value="{{i}}">{{i}}</option>
+					{%endfor%}
+					</select>
+					{%else%}
+					<input type="button" value="-" class="qtyminus" />
+					<input type="text" name="quantity" data-minqty="1" value="1" class="qty" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+					<input type="button" value="+" class="qtyplus" />
+					{%endif%}
+				  </div>
+                </div>
+
+                <button type="button" name="add" class="btn crowd-cart-btn" data-org-text="Purchase" data-btn-id="upsell-{{forloop.index}}-{{product.id}}">
+                  <span id="AddToCartText">Purchase</span>
+                </button>
+              </form>
+            </div>
+          </div>
+		  {%if upsell_product_layout == 'horizontal'%}
+		  </div>
+		  </div>
+		  {%endif%}
+       </div>
+      {%endfor%}
+	  </div>
+    {%if upsell_product_layout == 'vertical'%}
+	  </div>
+	</div>
+	{%endif%}	
+  </div>
+  {%if settings.crwdctrl_bottom_button_text !=''%}
+  <div class="bottom-buttons">
+    <div class="hide-btns"> </div>
+    <button class="btn confirm_add">{{settings.crwdctrl_bottom_button_text}}</button>
+  </div> 
+  {%endif%}
+</div>
+</div>
+{% if settings.crwdctrl_disclaimer_popup_enable %}
+<!-- start disclaimer popup -->
+  <div id="crwdctrl-disclaimer-popup" class="crowdcontrol" style="display:none">
+	{%if settings.crwdctrl_disclaimer_popup_heading !='' %}
+	<h2  class="text-center">{{settings.crwdctrl_disclaimer_popup_heading}}</h2>
+	{%endif%}
+	<hr class="popup_border" />	
+	<div class="disclaimer-content">
+	{%if settings.crwdctrl_disclaimer_popup_content !='' %}
+	  <div class="content">{{settings.crwdctrl_disclaimer_popup_content}}</div>
+	{%endif%}
+	  <div class="crowdctrl-checkbox">
+        <input type="checkbox" name="disclaimer" id="disclaimerchk" />
+		<label for="disclaimerchk"></label>
+	    {%if settings.crwdctrl_disclaimer_popup_chkbxtext !='' %}
+	    {{settings.crwdctrl_disclaimer_popup_chkbxtext}}
+	    {%endif%}
+	  </div>
+	</div>
+	<button disabled="disabled" class="disclaimer-continue btn">Continue</button>
+	<button class="disclaimer-cancel btn">Cancel</button>
+  </div>
+<!-- end disclaimer popup -->
+{% endif %}
+
+<!-- Start of quick-view-template -->
+<div id="crowdctrl-quickview-tpl" style="display:none">
+  <div class="crdctrlitem">
+    <div class="row">
+    <div class="grid_item crowd-col-6">
+      <div class="product-image"></div>      
+    </div>
+  
+    <div class="grid_item crowd-col-6"> 
+      <div class="product-detail">	
+	    <h1 class="product-name"></h1>	 	  			  
+	    <div class="product-prices">
+	      <s class="compare-price money"></s>
+          <span class="price money"></span>		
+	    </div>
+	    <div class="product-desc"></div>
+
+	    <form action="/cart/add" method="post" enctype="multipart/form-data" class="variants">
+		  <div class="varients-wrapper">
+			<select name="id" class="product-variants"></select>
+		  </div>                
+		  <div class="product-quantity clearfx">
+		    <label for="qty-qv">Quantity</label>
+			<div class="pqty">
+			  <select name="quantity" data-minqty="1" class="qlty_select">
+			  {%for i in (1..10)%}
+			    <option value="{{i}}">{{i}}</option>
+			  {%endfor%}
+			  </select>
+			  <div class="qtyincdec">
+			  <input type="button" value='-' class="qtyminus" />
+			  <input type="text" data-minqty="1" name="quantity" value="1" class="qty" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+			  <input type="button" value="+" class="qtyplus" />
+			  </div>
+		    </div>
+		  </div>
+		  <button type="button" name="add" class="cqvbtn btn crowd-cart-btn" data-btn-id=""><span id="AddToCartText">Add to Cart</span></button>
+	    </form>
+	  </div>
+    </div>
+	</div>
+  </div>
+</div>
+<!-- End of quick-view-template -->
+
+{{ 'crowd-control-A.scss.css' | asset_url | stylesheet_tag }}
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script type="text/javascript">
+window.crowdcontrol = {'money_format': {{ shop.money_format | json }},'shop_currency':'{{ shop.currency}}','cookie_enable':{{settings.crwdctrl_enable_cookies}},'file_url':'{{'' | file_url}}','asset_url':'{{"shop.css" | asset_url}}','reward_count':{{reward_prods|size}},'upsell_count':{{upsell_prods|size}}, 'enable_disclaimer':{{settings.crwdctrl_disclaimer_popup_enable}}, 'reward_vartype':'{{reward_product_vartype}}', 'reward_add_pick_opt': {{settings.crwdctrl_reward_pickopt}}, 'upsell_add_pick_opt':{{settings.crwdctrl_upsell_pickopt}},'enable_spbtns':{{settings.special-offer-btns-enable}},'reward_showdesc':{{settings.crwdctrl_reward_show_desc}},'upsell_showdesc':{{settings.crwdctrl_upsell_show_desc}}};
+window.crowdcontrol.updateOptionsInSelector = function(selectorIndex, parent) {
+  switch (selectorIndex) {
+    case 0:
+      var key = 'root';
+      var selector = $(parent + ' .single-option-selector:eq(0)');
+      break;
+    case 1:
+      var key = $(parent + ' .single-option-selector:eq(0)').val();
+      var selector = $(parent + ' .single-option-selector:eq(1)');
+      break;
+    case 2:
+      var key = $(parent + ' .single-option-selector:eq(0)').val();
+      key += ' / ' + $(parent + ' .single-option-selector:eq(1)').val();
+      var selector = $(parent + ' .single-option-selector:eq(2)');
+  }
+  var availableOptions = Shopify.optionsMap[key];
+  $(parent + ' .crdctrl-swatch[data-option-index="' + selectorIndex + '"] .crdctrl-swatch-element').each(function() {
+    if ($.inArray($(this).attr('data-value'), availableOptions) !== -1) {
+      $(this).removeClass('soldout').addClass('available').find(':radio').removeAttr('disabled','disabled');
+    } else {
+      $(this).removeClass('available').addClass('soldout').find(':radio').attr('disabled','disabled');
+    }
+  });
+
+};
+
+window.crowdcontrol.linkOptionSelectors = function(product, parent) {
+    // Building our mapping object.
+    Shopify.optionsMap = {};
+    for (var i=0; i<product.variants.length; i++) {
+      var variant = product.variants[i];
+      if (variant.available) {
+        // Gathering values for the 1st drop-down.
+        Shopify.optionsMap['root'] = Shopify.optionsMap['root'] || [];
+        Shopify.optionsMap['root'].push(variant.option1);
+        Shopify.optionsMap['root'] = Shopify.uniq(Shopify.optionsMap['root']);
+        // Gathering values for the 2nd drop-down.
+        if (product.options.length > 1) {
+          var key = variant.option1;
+          Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
+          Shopify.optionsMap[key].push(variant.option2);
+          Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
+        }
+        // Gathering values for the 3rd drop-down.
+        if (product.options.length === 3) {
+          var key = variant.option1 + ' / ' + variant.option2;
+          Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
+          Shopify.optionsMap[key].push(variant.option3);
+          Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
+        }
+      }
+    }
+    // Update options right away.
+    window.crowdcontrol.updateOptionsInSelector(0, parent);
+    if (product.options.length > 1) window.crowdcontrol.updateOptionsInSelector(1, parent);
+    if (product.options.length === 3) window.crowdcontrol.updateOptionsInSelector(2, parent);
+    // When there is an update in the first dropdown.
+    $(parent + " .single-option-selector:eq(0)").change(function() {
+      window.crowdcontrol.updateOptionsInSelector(1, parent);
+      if (product.options.length === 3) window.crowdcontrol.updateOptionsInSelector(2, parent);
+      return true;
+    });
+    // When there is an update in the second dropdown.
+    $(parent + " .single-option-selector:eq(1)").change(function() {
+      if (product.options.length === 3) window.crowdcontrol.updateOptionsInSelector(2, parent);
+      return true;
+    });
+};
+if(typeof Shopify.resizeImage == 'undefined') {
+Shopify.resizeImage=function(t,r){
+  try{
+	if("original"==r)return t;
+	var e=t.match(/(.*\/[\w\-\_\.]+)\.(\w{2,4})/);
+	return e[1]+"_"+r+"."+e[2];
+  }catch(r){
+	return t;
+  }
+};
+}
+window.crowdcontrol.urlParams = {};
+(window.onpopstate = function () {
+	var match,
+		pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		search = /([^&=]+)=?([^&]*)/g,
+		decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		query  = window.location.search.substring(1);
+    while (match = search.exec(query))
+      window.crowdcontrol.urlParams[decode(match[1])] = decode(match[2]);
+})();
+(function(){
+  window.ccAddEventListener = function (el, eventName, handler) {
+    if (el.addEventListener) {
+      el.addEventListener(eventName, handler);
+    } else {
+      el.attachEvent('on' + eventName, function() {
+        handler.call(el);
+      });
+    }
+  }
+  window.ccTriggerEvent = function (el, eventName, options) {
+    var event;
+    if (window.CustomEvent) {
+      event = new CustomEvent(eventName, options);
+    } else {
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent(eventName, true, true, options);
+    }
+    el.dispatchEvent(event);
+  }
+  var loadScript = function(url, callback) {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	if (script.readyState){ 
+	script.onreadystatechange = function(){
+	  if (script.readyState == "loaded" || script.readyState == "complete"){
+		script.onreadystatechange = null;
+		if(typeof callback !== 'undefined') callback();
+	  }
+	};
+	} else if(typeof callback !== 'undefined') {
+	script.onload = function(){
+	  callback();
+	};
+	}
+	script.src = url;
+	document.getElementsByTagName("head")[0].appendChild(script);    
+  };
+  function ccUcwords (str) {
+    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+        return $1.toUpperCase();
+    });
+  }
+  // Shopify Product form requirement
+  selectCallbackProduct = function(variant, selector) {  
+    if(ccUcwords(selector.product.type) == 'Reward') var pselectorid = 'reward-product-' + selector.product.id;
+    else if(ccUcwords(selector.product.type == 'Upsell')) var pselectorid = 'upsell-product-' + selector.product.id;
+	var $productMain = $('#' + selector.domIdPrefix).closest('#'+pselectorid);
+    var $product = $('#' + selector.domIdPrefix).closest('.product-detail');
+	var vrntscookie = window.crowdcontrol.addedVariants;
+	var btnscookiet = window.crowdcontrol.getCookie('crwdctrl_btns'),btnscookie = [];
+	if(btnscookiet == null || btnscookiet == '') btnscookiet = [];
+	if(!$.isArray(btnscookiet)) btnscookiet = JSON.parse(btnscookiet);
+	if(btnscookiet.length > 0) btnscookiet = window.crowdcontrol.arrayUnique(btnscookiet);
+    $.each(btnscookiet, function(key, value) {
+   		btnscookie.push(value.replace(/[a-z]+-[0-9]+-(.*?)/g, '$1'));
+	});
+    var variant_name;
+    if (variant) {
+      variant_name=variant.title;
+      //alert(variant_name);
+      if(variant_name.indexOf('/') > -1){
+        variant_name=variant_name.split('/')[1];
+        variant_name=$.trim(variant_name);
+        variant_name=variant_name.replace(/\s+/g, '-').toLowerCase();
+      }
+    }
+	if (variant && variant.featured_image) {
+		if ($('#ProductPhoto', $productMain).length > 0) {
+			var newImage = Shopify.resizeImage(variant.featured_image.src, 'grande');
+			$('#ProductPhoto img', $productMain).attr('src', newImage);
+		}
+		if ($('.image_thumbs', $productMain).length > 0) {
+			var newImage = Shopify.resizeImage(variant.featured_image.src, 'compact');
+			newImage = newImage.replace(/https?:/,'');
+			$('.image_thumbs img', $productMain).each(function() {
+			  var grandSize = $(this).attr('src');
+			  if (grandSize == newImage) {				
+				var grandeImage = Shopify.resizeImage(variant.featured_image.src, 'grande');
+				$('.product-image img', $productMain).attr('src', grandeImage);
+				$('.image_thumbs li', $productMain).removeClass('active');
+				$(this).parents('li').addClass('active');				
+				return false;
+			  }
+			});
+		}
+	}
+	var addToCartBtn = $('.crowd-cart-btn', $product);
+    if (variant && variant.available == true) {  
+	  //var isAdded = $.inArray(variant.id+"",vrntscookie) > -1 ? true : false;
+	  var isAdded = $.inArray(selector.product.id+"",btnscookie) > -1 ? true : false;
+	  if(addToCartBtn.attr('data-btn-id').match(/reward-/g)){		
+        $('#AddToCartText', $product).text((isAdded == true?'Confirmed':'Select'));
+      } else {
+        $('#AddToCartText', $product).text((isAdded == true?'Added to cart':'Purchase'));
+  	  }
+	  if(isAdded == true && addToCartBtn.attr('data-btn-id').match(/reward-/g)) {
+	    addToCartBtn.addClass('disabled').addClass('disable').attr('disabled', true).off('click');
+	  } else {
+	    addToCartBtn.removeClass('disabled').removeClass('disable').removeAttr('disabled');
+	    window.crowdcontrol.crowdAjaxAddToCart(pselectorid);
+	  }
+	  var qtyElem = $("input[name='quantity'], select[name='quantity']", $product);
+	  qtyElem.val(qtyElem.data('minqty'));
+	  $('.price.money span', $product).html(Shopify.formatMoney(variant.price, window.crowdcontrol.money_format));	  
+      //$("."+variant_name, $product).removeClass('soldout').addClass("available");
+    } else {
+      //$("."+variant_name, $product).removeClass('available').addClass("soldout");
+      var message = variant ? "Out of Stock" : "Unavailable";
+	  if( variant == null && addToCartBtn.attr('data-btn-id').match(/reward-/g) &&
+	  	  window.crowdcontrol.reward_add_pick_opt == true && $product.hasClass('varient-dropdown')) {
+		 message = 'Select';
+	  }
+      addToCartBtn.addClass('disabled').attr('disabled', 'disabled');
+      $('#AddToCartText', $product).text(message);      
+    }
+
+  };
+
+var crowdControlJavaScript = function($) {  
+  var vrntscookie = getCookie('crwdctrl_vrnts');
+  if(vrntscookie == null || vrntscookie == '') vrntscookie = [];
+  if(!$.isArray(vrntscookie)) vrntscookie = JSON.parse(vrntscookie);
+  if(vrntscookie.length > 0) vrntscookie = arrayUnique(vrntscookie);
+  var btnscookie = getCookie('crwdctrl_btns');
+  if(btnscookie == null || btnscookie == '') btnscookie = [];
+  if(!$.isArray(btnscookie)) btnscookie = JSON.parse(btnscookie);
+  if(btnscookie.length > 0) btnscookie = arrayUnique(btnscookie);
+  window.crowdcontrol.addedVariants = vrntscookie;
+
+  function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+      c_start = document.cookie.indexOf(c_name + "=");
+      if (c_start != -1) {
+        c_start = c_start + c_name.length + 1;
+        c_end = document.cookie.indexOf(";", c_start);
+        if (c_end == -1) {
+          c_end = document.cookie.length;
+        }
+        return unescape(document.cookie.substring(c_start, c_end));
+      }
+    }
+    return "";
+  }
+  window.crowdcontrol.getCookie = getCookie;
+  var createCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+    } else {
+      expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }  
+  function crowdctrlCookies(crdqvDivid){
+	if(window.crowdcontrol.cookie_enable) {
+	  if(typeof crdqvDivid === 'undefined') crdqvDivid = '';
+  	  var btnsCookie = getCookie('crwdctrl_btns');
+	  if(btnsCookie == null || btnsCookie == '') btnsCookie = [];
+	  if(!$.isArray(btnsCookie)) btnsCookie = JSON.parse(btnsCookie);
+	  if(btnsCookie.length > 0) btnsCookie = arrayUnique(btnsCookie);
+	  var cacheProds = [],
+		  countReward = 0,
+		  countUpsell = 0; 
+	  for(i=0; i < btnsCookie.length; i++){
+		cacheProds.push(btnsCookie[i].replace(/(.*)+-[0-9]+-(.*?)/g, '$1-$2'));
+		if(btnsCookie[i].match(/reward-/g)) countReward++;
+		if(crdqvDivid == '')
+	      var cartBtn = $('button.crowd-cart-btn[data-btn-id="'+btnsCookie[i]+'"]');
+	    else
+		  var cartBtn = $('#'+crdqvDivid+' button.crowd-cart-btn[data-btn-id="'+btnsCookie[i]+'"]');
+	    if(crdqvDivid != '') cartBtn.addClass('disable').off('click');
+		else cartBtn.attr('disabled',true).addClass('disabled').off('click');
+		cartBtn.text('Confirmed');
+		var prodDetail = cartBtn.closest('.product-detail');
+		prodDetail.find('.select-styled').off('click');
+		prodDetail.find('select').off('click');
+		prodDetail.find('input').off('click');
+	  }
+
+      if(cacheProds.length > 0 && crdqvDivid == '') {        
+		for(j=0; j < cacheProds.length; j++) {
+		  var pselctid = cacheProds[j].replace(/(.*)+-(.*)/g, '$1-product-$2')
+		  var divProd = $('.crowdcontrol #'+pselctid);
+		  divProd.addClass('remove-hide-product');
+		  if(divProd.length > 0) divProd.next().addClass('remove-hide-product');		
+		}		
+		if(countReward == window.crowdcontrol.reward_count) {
+		  $('.crowdcontrol .reward-products').remove();
+		  $('.crowdcontrol .special-offer').addClass('remove-hide-product').remove();
+		  if(!window.crowdcontrol.enable_spbtns) {
+		    $('.crowdcontrol .upsell-products .hide-upsell').removeClass('hide-upsell').addClass('show-upsell');
+		    $('.crowdcontrol .hide-btns').remove();
+		  }
+		}
+	  }
+    }
+  }
+  function crowdctrlConvertToSlug(text) {
+    return text
+    	   .toLowerCase()
+           .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+           .replace(/\s+/g, '-')
+           .replace(/-+/g, '-');
+  }
+  function arrayUnique(list) {
+    var result = [];
+    $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
+  }
+  window.crowdcontrol.arrayUnique = arrayUnique;
+  function crowdctrlQvProductViewVariants(product, quickviewTemplate) {  
+    for (var i = 0; i < product.variants.length; i++) {
+		var variant = product.variants[i];
+		var disable = '';
+		if (!variant.available) disable = ' disabled="disabled"';
+		var option = '<option value="' + variant.id + '"'+disable+'>' + variant.title + '</option>';
+		quickviewTemplate.find('form.variants select[name="id"]').append(option);
+    }
+    new Shopify.OptionSelectors("crdqv-product-select-" + product.id, {
+	  product: product,
+	  onVariantSelected: selectCallbackProduct
+    });
+	  
+	if (product.variants.length == 1 && product.variants[0].title.match(/Default/g)) {
+         quickviewTemplate.find('.selector-wrapper:eq(0)').hide();
+		 quickviewTemplate.find('.select-wrapper:eq(0)').hide();
+    }
+    if (product.variants.length > 1) {
+      	if (product.options.length == 1 && !product.options[0].name.match(/Title/g) && $('.single-option-selector:eq(0)',quickviewTemplate).prev("label").length <= 0) {
+             quickviewTemplate.find('.selector-wrapper:eq(0)').prepend('<label for="crdqv-product-select-'+product.id+'-option-0">' + product.options[0].name + '</label>');             
+        }
+
+      	quickviewTemplate.find('form.variants .selector-wrapper label').each(function(i, v) {
+         	$(this).html(product.options[i].name);
+			if(window.crowdcontrol.reward_add_pick_opt == true) {
+			  quickviewTemplate.find('.single-option-selector:eq('+ i +')')			  
+			    .prepend('<option value="">Pick a ' + product.options[i].name + '</option>')
+			    .val('')
+			    .trigger('change');
+			}
+        });
+		if(window.crowdcontrol.reward_add_pick_opt == true) {
+		  setTimeout(function() {quickviewTemplate.find('#AddToCartText').text('Select');}, 10);		  
+		}
+    }
+  }
+  function crowdctrlQvProductViewVariantsSwatch(product, quickviewTemplate) {    
+	for (var i = 0; i < product.variants.length; i++) {
+		var variant = product.variants[i];
+		var disable = '';
+		if (!variant.available) disable = ' disabled="disabled"';
+		var option = '<option value="' + variant.id + '"'+disable+'>' + variant.title + '</option>';
+		quickviewTemplate.find('form.variants select[name="id"]').append(option);
+	}
+	new Shopify.OptionSelectors("crdqv-product-select-" + product.id, {
+		product: product,
+		onVariantSelected: selectCallbackProduct
+	});
+	if (product.variants.length > 1) {
+      //start of quickview variant;
+      var filePath = window.crowdcontrol.file_url.substring(0, window.crowdcontrol.file_url.lastIndexOf('?'));
+      var assetUrl = window.crowdcontrol.asset_url.substring(0, window.crowdcontrol.asset_url.lastIndexOf('/'))+'/';
+      var options = "";
+      for (var i = 0; i < product.options.length; i++) {
+          options += '<div class="crdctrl-swatch clearfx" data-option-index="' + i + '">';
+          options += '<div class="header">' + product.options[i].name + '</div>';
+          var is_color = false;
+          if (/Color|Colour/i.test(product.options[i].name)) {
+              is_color = true;
+          }
+          var optionValues = new Array();
+          for (var j = 0; j < product.variants.length; j++) {
+              var variant = product.variants[j];
+              var value = variant.options[i];
+              var valueHandle = crowdctrlConvertToSlug(value);
+              var forText = 'swatch-' + i + '-' + valueHandle;
+           	  if (optionValues.indexOf(value) < 0) {
+                    //not yet inserted                    
+                    if (is_color) {
+						options += '<div data-value="' + value + '" class="crdctrl-swatch-element color ' + valueHandle + (variant.available ? ' available ' : ' soldout ') + '">';
+                        options += '<div class="tooltip">' + value + '</div>';
+                    } else {
+						options += '<div data-value="' + value + '" class="crdctrl-swatch-element ' + valueHandle + (variant.available ? ' available ' : ' soldout ') + '">';
+					}
+                    options += '<input id="' + forText + '" type="radio" name="option-' + i + '" value="' + value + '" ' + (j == 0 ? ' checked ' : '') + (variant.available ? '' : ' disabled') + ' />';
+					if (is_color) {
+                        options += '<div class="cbox"><label for="' + forText + '" style="background-color: ' + valueHandle + '; background-image: url(' + assetUrl + valueHandle + '_50x.png)"><span class="crossed-out"></span></label></div>';
+                    } else {
+                        options += '<label for="' + forText + '">' + value + '<span class="crossed-out"></span></label>';
+                    }
+                    options += '</div>';
+                    if (variant.available) {
+                        quickviewTemplate.find('.crdctrl-swatch[data-option-index="' + i + '"] .' + valueHandle).removeClass('soldout').addClass('available').find(':radio').removeAttr('disabled');
+                    }
+                    optionValues.push(value);
+               }
+           }
+           options += '</div>';
+       }
+       quickviewTemplate.find('form.variants select[name="id"]').after(options);
+       quickviewTemplate.find('.crdctrl-swatch :radio').change(function() {
+           var optionIndex = $(this).closest('.crdctrl-swatch').attr('data-option-index');
+           var optionValue = $(this).val();
+           $(this)
+               .closest('form')
+              .find('.single-option-selector')
+              .eq(optionIndex)
+              .val(optionValue)
+              .trigger('change');
+        });
+        
+        //end of quickview variant
+	}
+  }
+  function crowdQtyPlusMinus(){
+    $('.crowdcontrol .qtyplus, #crowdctrl-quickview .qtyplus').bind('click', function(e){
+      var currentVal = parseInt($(this).prev().val());
+      if (!isNaN(currentVal)) {
+        $(this).prev().val(currentVal + 1);
+      } else {
+        $(this).prev().val(1);
+      }
+	  window.ccTriggerEvent(document, 'crwdctrl.qty.change',{detail:{elem:$(this).prev()}});
+	});
+	$('.crowdcontrol .qtyminus, #crowdctrl-quickview .qtyminus').bind('click', function(e){
+      var currentVal = parseInt($(this).next().val());
+      if (!isNaN(currentVal) && currentVal > 2) {
+        $(this).next().val(currentVal - 1);
+      } else {
+        $(this).next().val(1);
+      }
+	  window.ccTriggerEvent(document, 'crwdctrl.qty.change',{detail:{elem:$(this).next()}});
+	});
+  }
+  function crowdAjaxAddToCart(divId) {
+	if(typeof divId == 'undefined' || divId == '') var $addToCartBtn = $('form[action^="/cart/add/"] .crowd-cart-btn');
+	else var $addToCartBtn = $('#'+divId+' .crowd-cart-btn');
+	$('.crdctrlitem form').on('submit', function(evt) {
+      evt.preventDefault();
+      evt.stopImmediatePropagation();
+      return false;
+    });
+	$addToCartBtn.bind('click', function(e) {
+	  e.preventDefault();
+	  e.stopImmediatePropagation();
+	  $('.note.errors').remove();
+	  var $addToCartBtn = $(this),
+	  $addToCartForm = $(this).closest('form'),
+	  $addToCartBtnText = $(this).find('span');
+	  if ($addToCartForm.length) {
+		$addToCartBtn
+		.attr('data-add-to-cart', $addToCartBtnText.text());
+		if($addToCartBtn.attr('data-btn-id').match(/reward-/g)) {
+		$addToCartBtn.prop('disabled', true)
+					 .addClass('disabled');
+		}
+
+		$.ajax({
+			url: '/cart/add.js',
+			dataType: 'json',
+			type: 'post',
+			data: $addToCartForm.serialize(),
+			success: function(lineItem) {			  
+			  var nextDetailDiv={'length':0};
+			  if($addToCartBtn.hasClass('cqvbtn')) {
+				var qvProdDiv = $addToCartBtn.closest('.crdctrlitem');
+				var prodDiv = $('#'+qvProdDiv.attr('id'));
+				var $addToCartBtnNw = prodDiv.find('.crowd-cart-btn');
+			  }	else {
+			    var $addToCartBtnNw = $addToCartBtn;
+				var prodDiv = $addToCartBtn.closest('.crdctrlitem');
+			    var gridDiv = $addToCartBtn.closest('.multiple_item');
+				
+				if(gridDiv.length > 0) {
+				  var prodDetailDiv = $addToCartBtn.closest('.product-detail');
+				  nextDetailDiv = prodDetailDiv.next();
+				}
+			  }
+			  var currVarnt = $addToCartForm.find('select[name="id"]').val();
+			  window.crowdcontrol.addedVariants.push(currVarnt);
+			  btnscookie.push($addToCartBtnNw.attr('data-btn-id'))
+			  if($addToCartBtnNw.attr('data-btn-id').match(/reward-/g)) {			    				
+				if(window.crowdcontrol.cookie_enable) {
+			      createCookie('crwdctrl_btns', JSON.stringify(btnscookie), 30);
+				  createCookie('crwdctrl_vrnts', JSON.stringify(window.crowdcontrol.addedVariants), 30);
+				}				
+				$addToCartBtnNw.attr('data-add-to-cart', $addToCartBtnText.text())
+								.prop('disabled', true)
+								.addClass('disabled');
+				$addToCartBtnNw.html('<span id="AddToCartText">Confirmed</span>');
+				if(nextDetailDiv.length > 0) {			
+				  var offset = nextDetailDiv[0].offsetTop - $(window).scrollTop();
+				  var visible_area_start = $(window).scrollTop();
+    			  var visible_area_end = visible_area_start + window.innerHeight;
+				  gridDiv.animate({
+					scrollTop: nextDetailDiv[0].offsetTop+10
+				  }, 500, function() {
+					/*var newoffset = offset;
+					newoffset -= nextDetailDiv.position().top;
+					if($(window).scrollTop() > 0) newoffset = newoffset/2;
+					if(offset > window.innerHeight){
+					  $('html,body').animate({scrollTop: newoffset}, 500);
+				    }*/
+				  });
+				  
+				} else {
+			      var nextProdDiv = prodDiv.next();
+			      if(nextProdDiv.length > 0){
+				    nextProdDiv.addClass('remove-hide-product');
+				    $('html, body').animate({
+					  scrollTop: nextProdDiv.offset().top - window.crowdcontrol.htop
+				    });
+			      }
+				}
+			  } else {
+			    $addToCartBtnNw.html('<span id="AddToCartText">Added to cart</span>');
+				$addToCartBtnNw.attr('data-add-to-cart', $addToCartBtnText.text());
+			  }
+			  if($addToCartBtn.hasClass('cqvbtn')){
+				closeCrowdctrlPopup();		
+			  }
+			  if(prodDiv.hasClass('last') && nextDetailDiv.length <= 0){
+				if(prodDiv.parents('.reward-products').length > 0) {				
+				  var nextSection = $('.crowdcontrol .special-offer');				
+				  nextSection.addClass('remove-hide-product');			  
+				  $('html, body').animate({
+				    scrollTop: nextSection.offset().top - window.crowdcontrol.htop
+				  });
+				  var upsellDiv = $('.crowdcontrol .upsell-products');
+				  if(upsellDiv.length > 0) {// && !window.crowdcontrol.enable_spbtns
+					upsellDiv.find('.hide-upsell').removeClass('hide-upsell').addClass('show-upsell');										
+				  }
+				  $('.crowdcontrol .bottom-buttons').find('.hide-btns').removeClass('hide-btns').addClass('show-bths');
+				}
+			  }
+			},
+			error: function(XMLHttpRequest, textStatus) {
+			  var data = eval('(' + XMLHttpRequest.responseText + ')');
+			  var response = data.description;
+			  var status = XMLHttpRequest.status;
+			  if (status === 422) {
+				$addToCartBtnText.text("Sold Out");
+			  } else {
+				$addToCartBtn.prop('disabled', false).removeClass('disabled');
+				$addToCartBtnText.text($addToCartBtn.attr('data-add-to-cart'));
+			  }
+			  $addToCartBtn.after('<p class="note errors">' + response + '</p>');
+			}
+		});
+	  }
+	});
+  }
+
+  window.crowdcontrol.crowdAjaxAddToCart = crowdAjaxAddToCart;
+  function takeAlook(){
+	$('.takealook').bind('click', function(){
+	  var upsellDiv = $('.crowdcontrol .upsell-products');
+	  if(upsellDiv.length > 0){
+		upsellDiv.find('.hide-upsell').removeClass('hide-upsell').addClass('show-upsell');
+		$('.crowdcontrol .bottom-buttons').find('.hide-btns').removeClass('hide-btns').addClass('show-bths');
+		$('html, body').animate({
+		  scrollTop: upsellDiv.offset().top - window.crowdcontrol.htop
+		});
+	  }
+	});	
+  }
+  function crowdctrlLoader(remove){
+    if(typeof remove == 'undefined') remove = false;
+	if(remove == true){
+	  $('#crowdctrl-overlay').remove();
+	  return false
+	}
+	var loaderGif = "{{ 'crowdctrl_loader.gif' | asset_url }}";
+	$("body").append('<div id="crowdctrl-overlay"><div class="crowdctrl-loader"><img class="lazyload" data-src="'+loaderGif+'" alt="loader" /></div></div>');
+	$('#crowdctrl-overlay').bind('contextmenu', function(e) {
+	  return false;
+	});
+  }
+  function crowdctrlPopup(contentId, defaults){
+    if(typeof contentId == 'undefined') return false;
+	var settings = {'ovClass':'','ovClick':true,'showClose':true,'closeBtn':'.ctrlclose',closeCallback:null};
+	if(typeof defaults === 'object') {
+	  $.extend( settings, defaults );
+	}
+	if(contentId == 'crowdctrl-quickview') {
+	  $('#'+contentId).wrap('<div id="crowdctrl-overlay" class="'+settings.ovClass+'"></div>').wrap('<div class="crwctrl-olcontent"></div>');	  
+	} else {
+      $('#'+contentId).after('<div class="crdctrl-olhide-'+contentId+'"></div>');	
+	  var htmlDiv = $('#'+contentId)[0].outerHTML;
+	  $('#'+contentId).remove();
+	  $("body").append('<div id="crowdctrl-overlay" class="'+settings.ovClass+'"><div class="crwctrl-olcontent">'+ htmlDiv +'</div></div>');
+	}
+	$('#crowdctrl-overlay .crwctrl-olcontent').append('<button type="button" class="ctrlclose">x</button>');
+	if(settings.showClose == false) {
+	  $('#crowdctrl-overlay .ctrlclose').hide();
+	}
+	$("body").addClass('crowd-popup');
+	window.ccTriggerEvent(document, 'crwdctrl.popup.shown');
+	if($('.crwctrl-olcontent #'+contentId).is(':hidden')) {
+	  $('.crwctrl-olcontent #'+contentId).show();
+	}	
+	$('#crowdctrl-overlay').bind('contextmenu', function(e) {
+	 // return false;
+	});
+	if(settings.ovClick == true) {
+	  $('#crowdctrl-overlay').bind('click', function(e) {
+		if(contentId != 'crowdctrl-quickview') {
+		  $('#crowdctrl-overlay .crwctrl-olcontent #'+contentId).insertAfter($('.crdctrl-olhide-'+contentId)).hide();
+		  $('.crdctrl-olhide-'+contentId).remove();
+		}
+	    $('#crowdctrl-overlay').remove();
+	    $("body").removeClass('crowd-popup');
+		if(settings.closeCallback != null) settings.closeCallback();
+	  }).children('.crwctrl-olcontent').bind('click', function (event) {
+		event.stopPropagation();
+		//return false;
+	  });
+	}
+
+	$('#crowdctrl-overlay .ctrlclose, #crowdctrl-overlay '+settings.closeBtn).bind('click', function(e) {
+	  if(contentId != 'crowdctrl-quickview') {
+	    $('#crowdctrl-overlay .crwctrl-olcontent #'+contentId).insertAfter($('.crdctrl-olhide-'+contentId)).hide();
+	    $('.crdctrl-olhide-'+contentId).remove();
+	  }
+	  $('#crowdctrl-overlay').remove();
+	  $("body").removeClass('crowd-popup');
+	  if(settings.closeCallback != null) settings.closeCallback();
+	});
+  }
+  function closeCrowdctrlPopup() {
+    $('#crowdctrl-overlay .ctrlclose').trigger('click');
+  }
+  function alignProductGrids() {
+	if ($('.vertical-layout').length) {		 
+		 $('.vertical-layout').each(function(){
+			var tallestProductInfo = 0;
+			var extpad = 0;
+			productGridElements = $(this).find('.crdctrlitem');
+			if($(window).width() > 767) {
+			  productGridElements.each(function (index) {
+				var productInfoHeight = $(this).outerHeight(true);
+
+				if (productInfoHeight > tallestProductInfo) {
+					tallestProductInfo = productInfoHeight;
+				}
+			  });
+			}
+
+			productGridElements.css('min-height', tallestProductInfo+2);
+		});
+	}
+  }
+  function multipleItemHeight() {
+	if ($('.multiple_item').length) {		 
+		 $('.multiple_item').each(function(){
+			$(this).css('max-height', $('#product-detail', $(this).closest('.crdctrlitem')).height()+20);
+		});
+	}
+  }
+
+  function initOptionSelectorReplicate(product_id,replicate_count) {
+    if(typeof product_id == 'undefined') return;
+	if(typeof replicate_count == 'undefined' || replicate_count <= 1) return;	
+	var $productMain = $('#reward-product-' + product_id);
+	var product = $productMain.data('product');
+	if (product.variants.length == 1 && product.variants[0].title.match(/Default/g)) return;
+	for(i=1;i<replicate_count;i++) {
+	  var $replicateDetail = $productMain.find('#product-detail-' + i);	  
+	  new Shopify.OptionSelectors('reward-product-select-'+product_id+'-'+i, { product: product,
+		      onVariantSelected: selectCallbackProduct });
+	  if (product.variants[0].title.match(/Default/g)) {
+         $('.selector-wrapper, .crdctrl-swatch', $replicateDetail).hide();
+		 $('.select-wrapper', $replicateDetail).hide();
+      }
+      if (product.variants.length > 1) {
+      	if (product.options.length == 1) {
+             $replicateDetail.find('.selector-wrapper:eq(0)').prepend('<label>' + product.options[0] + '</label>');             
+        }
+		if(window.crowdcontrol.reward_vartype == 'dropdown' &&
+		   window.crowdcontrol.reward_add_pick_opt == true) {
+      	  $replicateDetail.find('form .selector-wrapper label').each(function(i, v) {
+         	$(this).html(product.options[i]);
+			$replicateDetail.find('.single-option-selector:eq('+ i +')')	  
+			  .prepend('<option value="">Pick a ' + product.options[i] + '</option>')
+			  .val('')
+			  .trigger('change');
+          });
+		  $replicateDetail.find('#AddToCartText').text('Select');
+		}
+      }
+	}
+  }
+  $(window).on('resize', function () {
+	alignProductGrids();
+  });
+
+  $(window).on('load', function() {
+    $('body').append($('.cc-welcomebg').detach());
+    $('body').append($('.cc-returningbg').detach());
+	$('#crowdcontrol').show();
+    $('.cc-welcomebg,.cc-returningbg').bind('contextmenu', function(e) {
+	  return false;
+	});
+	if(getCookie('view_reward_page') != '1') {
+	  $('.cc-welcomebg').show();
+	} else {
+	  $('.cc-returningbg').show();
+	  //$('.reward-products .crdctrlitem').first().addClass('remove-hide-product');
+	}
+	alignProductGrids();
+	multipleItemHeight();
+  });
+
+  $(function() {
+    window.crowdcontrol.htop = 0;
+    if($(window).width() > 767) window.crowdcontrol.htop = $('.site-header').outerHeight();
+	$('#crwdctrl-welcmsg .popup-btn').click(function(event) {
+		event.preventDefault();
+	    $('html, body').animate({
+		  scrollTop: $('#crowdcontrol').offset().top - window.crowdcontrol.htop
+	    });
+		createCookie('view_reward_page','1',30);
+		$('.cc-welcomebg').hide();
+		$('#crowdcontrol').show();
+		$('.reward-products .crdctrlitem').first().addClass('remove-hide-product');
+		event.stopImmediatePropagation();
+	});
+	$('#crwdctrl-returningmsg .popup-btn').click(function(event) {
+		event.preventDefault();
+	    $('html, body').animate({
+		  scrollTop: $('#crowdcontrol').offset().top - window.crowdcontrol.htop
+	    });
+		$('.cc-returningbg').hide();
+		$('#crowdcontrol').show();
+		$('.reward-products .crdctrlitem').first().addClass('remove-hide-product');
+		event.stopImmediatePropagation();
+	});
+	crowdctrlCookies();{% assign rpnacnt = 0 %}
+    {% for rewdprod in reward_prods %}{% assign handleindex = rewdprod | abs %}{% assign product = collection.products[ handleindex ] %}{% assign repcount = replicate_prods[handleindex] | ceil %}
+      var $product = $('#reward-product-{{ product.id }}');
+	  if($product.length > 0) {
+	  {% if product.available %}
+          new Shopify.OptionSelectors("reward-product-select-{{ product.id }}", { product: {{ product | json }},
+		      onVariantSelected: selectCallbackProduct });
+        {% if product.options.size == 1 and product.options.first != 'Title' %}
+		  if($('.single-option-selector:eq(0)',$product).prev("label").length <= 0)
+            $('.selector-wrapper:eq(0)',$product).prepend('<label for="product-select-{{ product.id }}-option-0">{{ product.options.first | escape }}</label>');
+        {% endif %}
+        {% if product.variants.first.title contains 'Default' %}
+        $('.selector-wrapper, .crdctrl-swatch',$product).hide();
+		$('.selector-wrapper',$product).closest('.select-wrapper').hide();
+		{% elsif reward_product_vartype == 'dropdown' and settings.crwdctrl_reward_pickopt == true %}{% for option in product.options %}  $('.single-option-selector:eq({{forloop.index0}})', $product)      
+		  .prepend('<option value="">Pick a {{ product.options[forloop.index0] }}</option>')
+		  .val('')
+		  .trigger('change');$('#product-detail #AddToCartText', $product).text('Select');{% endfor %}{% endif %}
+		initOptionSelectorReplicate({{ product.id }},{{repcount}});
+	  {% else %}{% assign rpnacnt = rpnacnt | plus: 1 %}
+		$('select',$product).off('click');
+		$('input',$product).off('click');
+		$('.crowd-cart-btn',$product).text('Sold Out')
+						.addClass('disabled').attr("disabled", "disabled")
+						.off('click');
+	  {% endif %}
+	  }
+    {% endfor %}var rpnacnt = {{rpnacnt}};
+    {% for upslprod in upsell_prods %}{% assign handleindex = upslprod | abs %}{% assign product = collection.products[ handleindex ] %}  
+      var $product = $('#upsell-product-{{ product.id }}');
+	  {% if product.available %}
+          new Shopify.OptionSelectors("upsell-product-select-{{ product.id }}", { product: {{ product | json }},
+		      onVariantSelected: selectCallbackProduct });
+        {% if product.options.size == 1 and product.options.first != 'Title' %}
+          if($('.single-option-selector:eq(0)',$product).prev("label").length <= 0)
+		    $('.selector-wrapper:eq(0)',$product).prepend('<label for="product-select-{{ product.id }}-option-0">{{ product.options.first | escape }}</label>');
+        {% endif %}
+        {% if product.variants.first.title contains 'Default' %}
+          $('.selector-wrapper, .crdctrl-swatch',$product).hide();
+		  $('.selector-wrapper',$product).closest('.select-wrapper').hide();
+        {% elsif upsell_product_vartype == 'dropdown' and settings.crwdctrl_upsell_pickopt == true %}{% for option in product.options %}  $('.single-option-selector:eq({{forloop.index0}})', $product)      
+		  .prepend('<option value="">Pick a {{ product.options[forloop.index0] }}</option>')
+		  .val('')
+		  .trigger('change');$('#product-detail #AddToCartText', $product).text('Select');{% endfor %}{% endif %}
+	  {% else %}
+		$('select',$product).off('click');
+		$('input',$product).off('click');
+		$('.crowd-cart-btn',$product).text('Sold Out')
+						.addClass('disabled').attr("disabled", "disabled")
+						.off('click');
+	  {% endif %}
+    {% endfor %}
+	$('<div />', {'id':'crowdctrl-quickview','class': 'crowdcontrol'}).appendTo($("body")).hide();
+	crowdQtyPlusMinus();
+	crowdAjaxAddToCart();
+	$('select[name="id"]').removeAttr('disabled');
+	if($('#crowdctrl-overlay').is(':visible')) {
+	  $("body").addClass('crowd-popup');
+	}
+	takeAlook();	
+	if(window.crowdcontrol.reward_count == 0 || rpnacnt == window.crowdcontrol.reward_count) {
+	  $('.crowdcontrol .special-offer').addClass('remove-hide-product');
+	}
+	var nextUrl = '';
+	{% if settings.crwdctrl_redirect == 'checkout' %}
+	nextUrl += '/checkout';
+	{% elsif settings.crwdctrl_redirect == 'cart' %}
+	nextUrl += '/cart';
+	{% elsif settings.crwdctrl_redirect == 'widget' and settings.crwdctrl_page_url %}
+	nextUrl += '/{{settings.crwdctrl_page_url}}';
+	{% endif %}
+	var ccdiscount = sessionStorage.getItem('crwdctrl_discount');
+    if(window.location.href.indexOf('discount') > -1) {
+      var discountcode = window.location.href.split('discount=')[1];	  
+	  if (discountcode && ccdiscount != discountcode) {
+		sessionStorage.setItem('crwdctrl_discount', discountcode);
+		ccdiscount = discountcode;
+	  }      
+    } else if (typeof window.crowdcontrol.urlParams["discount"] != 'undefined' && window.crowdcontrol.urlParams["discount"] != '') {
+	  var discountcode = window.crowdcontrol.urlParams["discount"];
+	  if (discountcode && ccdiscount != discountcode) {
+		sessionStorage.setItem('crwdctrl_discount', discountcode);
+		ccdiscount = discountcode;
+	  }
+	}	
+	{% if settings.crwdctrl_redirect == 'checkout' %}
+	if (ccdiscount) {
+	  nextUrl += '?discount='+ccdiscount;
+	}
+	{% endif %}
+	$('.confirm_add , .nothanks').attr('href', nextUrl);
+	$('.confirm_add , .nothanks').on('click', function() {
+		var goUrl = $(this).attr('href');
+		if(window.crowdcontrol.enable_disclaimer) {
+		  crowdctrlPopup('crwdctrl-disclaimer-popup',	{
+			'ovClass':'disclaimer',
+			'ovClick':false,
+			'showClose':false,
+			'closeBtn':'.disclaimer-cancel',
+			closeCallback:function(){}
+		  });
+		  $('#crwdctrl-disclaimer-popup .disclaimer-continue').attr('disabled', true);
+		  $('#crwdctrl-disclaimer-popup input[name="disclaimer"]').on('click', function() {
+		    if ($(this).is(':checked')) {
+		      $('#crwdctrl-disclaimer-popup .disclaimer-continue').attr('disabled', false);
+			  $('#crwdctrl-disclaimer-popup .disclaimer-continue').on('click', function() {			  
+			    location.href = goUrl;
+			  });
+		    } else {
+		      $('#crwdctrl-disclaimer-popup .disclaimer-continue').attr('disabled', true);
+			  $('#crwdctrl-disclaimer-popup .disclaimer-continue').off('click');
+		    }
+		  });
+		} else {
+		  location.href = goUrl;
+		}
+		return false;
+	});
+
+	$('.crdctrl-swatch-element label').click(function(e){
+	  e.preventDefault();
+	  $(this).closest('.crdctrl-swatch-element').find(':radio').prop('checked',true).trigger('change');
+	  e.stopImmediatePropagation();
+	});
+    $('.crdctrl-swatch :radio').change(function(e) {
+      var optionIndex = $(this).closest('.crdctrl-swatch').attr('data-option-index');
+      var optionValue = $(this).val();
+      $(this).closest('form').find('.single-option-selector')
+			 .eq(optionIndex).val(optionValue).trigger('change');
+	  var JSONData = $(this).parents('.crdctrlitem').data('product');
+      var productSection = '#' + $(this).parents('.crdctrlitem').attr('id');
+      var pdetailWrapper = $(this).closest('.product-detail');
+	  var swatchOptions = pdetailWrapper.find('.crdctrl-swatch');
+      if (swatchOptions.length > 1){
+          window.crowdcontrol.linkOptionSelectors(JSONData, productSection+' #'+pdetailWrapper.attr('id'));		
+      }
+    });
+    $('.reward-products .crdctrlitem, .upsell-products .crdctrlitem').each(function() {
+      var JSONData = $(this).data('product');
+      var productSection = '#' + $(this).attr('id');
+      var pdetailWrapper = $(this).find('.product-detail');
+	  pdetailWrapper.each(function() {
+	    var swatchOptions = $(this).find('.crdctrl-swatch');
+        if (swatchOptions.length > 1) {
+          window.crowdcontrol.linkOptionSelectors(JSONData, productSection+' #'+$(this).attr('id'));
+		  swatchOptions.each(function(){
+			$(this).find(':radio').eq(0).trigger('click');
+		  });
+        }
+	  });
+    });
+
+	$('.crowdcontrol .more').click(function() {
+	    crowdctrlLoader();
+      	var product_handle = $(this).attr('data-handle');
+		var productDetail = $(this).closest('.product-detail');
+		var addCartBtn = productDetail.find('.crowd-cart-btn');	
+		var addCartBtnText = addCartBtn.find('#AddToCartText').text();
+      	Shopify.getProduct(product_handle, function(product) {
+          var template = $('#crowdctrl-quickview-tpl').html();          
+          var quickview = $('#crowdctrl-quickview');
+		  if(quickview.length <= 0){
+			quickview = $('<div />', {'id':'crowdctrl-quickview','class': 'crowdcontrol'})
+				  .appendTo($("body"));
+		  }
+		  quickview.html(template);
+		  var isReward = false;
+		  var isUpsell = false;
+		  if(addCartBtn.attr('data-btn-id').match(/reward-/g)) {
+			isReward = true;
+			//quickview.removeClass('upsell-products').addClass('reward-products');
+		  }
+		  if(addCartBtn.attr('data-btn-id').match(/upsell-/g)) {
+			isUpsell = true;
+			//quickview.removeClass('reward-products').addClass('upsell-products');
+		  }
+          quickview.find('.product-name').html(product.title);
+          var featuredImage = Shopify.resizeImage(product.featured_image, 'grande');
+		  quickview.find('.product-image').append('<img class="image_left lazyload" data-src="' + featuredImage + '" title="' + product.title + '"/>');
+		  if (product.images.length > 1) {
+			var quickViewThumbs = $('<div />', {'class': 'image_thumbs'}).insertAfter(quickview.find('.product-image'));
+			var quickViewThumbsUl = $('<ul />').appendTo(quickViewThumbs);
+			var count = 0;
+			for (i in product.images) {
+				if (count < product.images.length) {
+					 var grande = Shopify.resizeImage(product.images[i], 'grande');
+					 var compact = Shopify.resizeImage(product.images[i], 'compact');
+					 var item = '<li'+ (count==0?' class="active"':'') +'><a href="javascript:void(0)" data-image="' + grande + '"><img class="img-responsive lazyload" data-src="' + compact + '"  /></a></li>'
+					 quickViewThumbsUl.append(item);
+					 count = count + 1;
+				 }
+			 }
+			 quickViewThumbs.find('a').on('click', function() {
+				var quickViewFeatureImage = quickview.find('.product-image img');
+				if (quickViewFeatureImage.attr('src') != $(this).attr('data-image')) {
+					quickViewFeatureImage.attr('src', $(this).attr('data-image'));
+					quickViewThumbs.find('li').removeClass('active');
+					$(this).parent().addClass('active');
+				 }
+			  });    	 
+			 
+		  }
+          var showDesc = window.crowdcontrol[(isReward?'reward':'upsell')+'_showdesc'];
+          if (quickview.find('.product-desc').length > 0) {
+		  	  if(showDesc == true) {
+				  var descriptions = product.description.split("<!--details-->");
+				  if(descriptions.length > 1) {
+					var description = descriptions[1].replace(/(<div)/igm, '<p').replace(/<\/div>/igm, '</p>');                
+				  } else {
+					var description = descriptions[0].replace(/(<div)/igm, '<p').replace(/<\/div>/igm, '</p>');
+				  }
+			  } else {
+			  	  var description = product.description.replace(/(<div)/igm, '<p').replace(/<\/div>/igm, '</p>');
+			  }
+              quickview.find('.product-desc').html(description);
+          }
+          quickview.find('.crdctrlitem').attr('id', (isReward?'reward':'upsell')+'-product-' + product.id);		            
+          quickview.find('.varients-wrapper select').attr('id', 'crdqv-product-select-' + product.id);
+		  if(isReward && productDetail.find('.product-prices').length <= 0) {
+		    quickview.find('.product-prices').remove();
+		  }else{			
+			if (product.compare_at_price > product.price) {
+			  quickview.find('.compare-price').html(Shopify.formatMoney(product.compare_at_price_max, window.crowdcontrol.money_format)).show();
+			  quickview.find('.price').addClass('sale-price');
+			  var priceText = Shopify.formatMoney(product.price, window.crowdcontrol.money_format);
+			  if(isUpsell) priceText = 'Backer pricing <span>' + priceText + '</span>';
+			  quickview.find('.price').html(priceText);
+			} else {
+			  quickview.find('.compare-price').html('').hide();
+			  quickview.find('.price').html('<span>'+Shopify.formatMoney(product.price, window.crowdcontrol.money_format)+'</span>');
+			  quickview.find('.price').removeClass('sale-price');
+			}
+		  }
+		  quickview.find('.crowd-cart-btn')
+		  .attr('data-btn-id', addCartBtn.attr('data-btn-id'))
+		  .find('#AddToCartText').text(addCartBtnText);		  
+
+		  var isDropdown = true;
+		  if(productDetail.hasClass('varient-box'))
+			isDropdown = false;
+          if (product.available) {
+		    var selectVarId = quickview.find('.product-variants');
+		    quickview.find('.varients-wrapper').html('').append(selectVarId);
+			if(isDropdown) {
+              crowdctrlQvProductViewVariants(product, quickview);
+			  quickview.find('.product-detail').addClass('varient-dropdown');
+			} else {
+			  crowdctrlQvProductViewVariantsSwatch(product, quickview);
+		      quickview.find('.product-detail').addClass('varient-box');			  
+			  var swatchOptions = quickview.find('.varients-wrapper .crdctrl-swatch');
+			  if (swatchOptions.length > 1){
+				window.crowdcontrol.linkOptionSelectors(product, '#crowdctrl-quickview');
+				swatchOptions.each(function(){
+					$(this).find(':radio').eq(0).trigger('click');
+				});
+			  }
+			}
+			for(t=0;t<product.tags.length;t++) {
+			  var tag = product.tags[t];
+			  if(tag.match(/custom\[(.*)\]/g)) {
+			    var opttitle = tag.replace(/custom\[(.*)\]/g, "$1")
+			    var opthtml = '<div class="customopt"><label>'+opttitle+'</label><input type="text" name="properties['+opttitle+']" /></div>';
+				quickview.find('.varients-wrapper').append(opthtml);
+			  }
+			}
+          } else {
+		    quickview.find('.product-variants').hide();
+		  }
+		  if(isReward && productDetail.find('.product-quantity').length <= 0) {
+		    quickview.find('.product-quantity').remove();
+		  } else {
+			if(isDropdown)
+			  quickview.find('.product-quantity .qtyincdec').remove();
+		    else
+			  quickview.find('.product-quantity select').remove();
+		  }
+
+          crowdctrlLoader(true);
+		  crowdctrlPopup('crowdctrl-quickview',{'ovClass':'qckview'});
+		  crowdQtyPlusMinus();
+          crowdAjaxAddToCart('crowdctrl-quickview');		  
+		  crowdctrlCookies('crowdctrl-quickview');
+		  if(addCartBtn.hasClass('disabled') && isReward) {
+			var prodDetail = quickview.find(".product-detail");			
+			quickview.find(".crowd-cart-btn")
+							.find('#AddToCartText')
+							.text(addCartBtnText);
+            quickview.find(".crowd-cart-btn")
+							.addClass('disable').addClass('disabled')
+							.attr("disabled", "disabled")
+							.off('click');
+		  }
+          if (!product.available) {         
+            var prodDetail = quickview.find(".product-detail");
+			prodDetail.find('.select-styled').off('click');
+			prodDetail.find('select').off('click');
+			prodDetail.find('input').off('click');
+            quickview.find(".crowd-cart-btn").text('Sold Out')
+							.addClass('disabled').attr("disabled", "disabled")
+							.off('click');
+          }
+
+        });
+		
+      	return false;
+    });
+  });
+
+};
+
+if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.11)) {
+  loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', function(){
+	loadScript("{{ 'api.jquery.js' | shopify_asset_url}}");
+    crowdControlJavaScript(jQuery);
+  });
+} else {
+  loadScript("{{ 'api.jquery.js' | shopify_asset_url}}");
+  crowdControlJavaScript(jQuery);
+}
+})();
+</script>

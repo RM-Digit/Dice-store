@@ -1,0 +1,21 @@
+{% comment %} {{ js_content_for_shogun_defer_css }} {% endcomment %}
+
+<style type="text/css">
+	.wh-hidden{display: none;}.wh-cart-total {font-weight: bold;display: inline-block;  margin-top: 5px;font-size: 22px;color: #000000;background-color: #FFFF4D;} .additional-notes{text-align:right;background-color: #FFFF4D;color: #000000;font-size: 14px;} .booster-messages{display:block;}
+	#booster-discount-item{font-size:70%;padding-top: 5px;padding-bottom: 5px;} #booster-summary-item{font-size:70%;padding-top: 5px;padding-bottom: 5px;} input#booster-discount-code{max-width:200px;display:inline-block;} button#apply-booster-discount{display:inline-block;max-width:200px;}
+</style>
+
+<link rel="preload" href="{{ 'buddha-megamenu.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'buddha-megamenu.css' | asset_url }}"></noscript>
+
+<script>
+__engine_scriptsloaded['css'] = function()
+{
+	loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css');
+	loadCSS('{{ 'bold-brain-widget.css' | asset_url }}');
+
+	{% unless wh_settings_cart_type == 'page' %}
+		loadCSS('{{ 'ajaxify.scss.css' | asset_url }}');
+	{% endunless %}
+}
+</script>

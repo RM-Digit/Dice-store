@@ -1,0 +1,32 @@
+{% include 'wh_calculate_discount' with product, hide_method: 'break' %}
+{%- assign product_img_url = product.featured_image.src | img_url: '300x'-%}
+{%- if grid_width_large == 'large--one-whole' -%}
+  {%- assign product_img_url = product.featured_image.src | img_url: '1200x' -%}
+{%- elsif grid_width_large == 'large--one-half' -%}
+  {%- assign product_img_url = product.featured_image.src | img_url: '900x' -%}
+{%- endif -%}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available  %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="grid__item {{ grid_width_small }} {{ grid_width_medium }} {{ grid_width_large }}{% if on_sale %} on-sale{% endif %}  product-grid-item">
+  <a href="{{ product.url }}" class="grid__image">
+    <img data-expand=”-10” data-src="{{ product_img_url }}" alt="{{ product.featured_image.alt | escape }}" class="lazyload">
+  </a>
+  <div class="figcaption {{ settings.product_grid_style }} {{ settings.collection_text_alignment | default: 'text-center' }}">
+    <a href="{{ product.url }}">
+      <p class="h6 name_wrapper">
+        {{ product.title }}
+      </p>
+     
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,23 @@
+{% unless wh_settings_cart_type == 'page' %}
+	{{ 'ajaxify.scss.css' | asset_url | stylesheet_tag }}
+{% endunless %}
+
+<style type="text/css">
+	{% comment %}Wholesale Hero CSS{% endcomment %}
+	.wh-hidden{display: none;}.wh-cart-total {font-weight: bold;display: inline-block;  margin-top: 5px;font-size: 22px;color: #000000;background-color: #FFFF4D;} .additional-notes{text-align:right;background-color: #FFFF4D;color: #000000;font-size: 14px;} .booster-messages{display:block;}
+	#booster-discount-item{font-size:70%;padding-top: 5px;padding-bottom: 5px;} #booster-summary-item{font-size:70%;padding-top: 5px;padding-bottom: 5px;} input#booster-discount-code{max-width:200px;display:inline-block;} button#apply-booster-discount{display:inline-block;max-width:200px;}
+</style>
+
+<script>
+document.addEventListener("StartCssLoading", function(event)
+{
+	loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css');
+	loadCSS('{{ 'buddha-megamenu.css' | asset_url }}');
+	loadCSS('{{ 'bold-brain-widget.css' | asset_url }}');
+});
+</script>
+
+
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+{{ 'buddha-megamenu.css' | asset_url | stylesheet_tag }}
+{{ 'bold-brain-widget.css' | asset_url | stylesheet_tag }} {% endcomment %}
